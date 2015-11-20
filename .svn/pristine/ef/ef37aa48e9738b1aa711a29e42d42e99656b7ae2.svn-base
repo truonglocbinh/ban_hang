@@ -1,0 +1,7 @@
+<?php session_start(); ?>
+<?php require("../config.php"); ?>
+<?php
+session_destroy();
+header("location:".baseurl);
+exit();
+?>

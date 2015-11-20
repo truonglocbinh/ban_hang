@@ -1,0 +1,89 @@
+<?php require("configCart.php"); ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Shop Cart</title>
+<link type="text/css" href="../../styles/styleIndex.css" rel="stylesheet" />
+<style type="text/css">
+* {
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	font: 12px Tahoma, Geneva, sans-serif;
+	padding: 20px;
+}
+.cls {
+	clear: left;
+}
+td {
+	padding: 5px 10px;
+	border: 1px solid #CCC;
+}
+td.title {
+	font-weight: bold;
+	color: #060;
+}
+img {
+	float: left;
+	margin-right: 5px
+}
+</style>
+</head>
+
+<body>
+<div id="content">
+	<div id="leftcontent">
+		<?php require("homeLeftMain.php"); ?>
+	<div id="rightcontent">
+        <h3>Giỏ Hàng Của Bạn</h3>
+        
+<div style="height:30px"></div>
+<?php
+require("updateCart.php");
+?>
+<form action="" method="post">
+<table width="673" border="0">
+  <tr>
+    <td width="180" class="title">Hình ảnh</td>
+    <td width="117" class="title">Đơn giá(VND)</td>
+    <td width="123" class="title">Số lượng</td>
+    <td width="156" class="title">Thành tiền(VND)</td>
+    <td width="75" class="title">Xoá</td>
+  </tr>
+  <?php $sum=0;
+  		$val =array();
+  		if(isset($_SESSION['cart']) && $_SESSION['cart'] != NULL){ ?>
+  <?php foreach($_SESSION['cart'] as $key => $val){ ?>
+  <tr>
+    <td>
+    	<img src="../../images/products/<?php echo $val['image']; ?>" width="90" />
+        <h3><?php echo $val['name']; ?></h3>
+    </td>
+    <td><?php echo $val['price']; ?></td>
+    <td><input type="text" name="qty[<?php echo $key; ?>]" value="<?php echo $val['qty']; ?>" size="5" /></td>
+    <td><?php $sumPrice=$val['qty']*$val['price'];echo $sumPrice; ?></td>
+    <td><a href="delCart.php?id=<?php echo $key; ?>">Delete</a></td>
+  </tr>
+  <?php $sum= $sum + $sumPrice; } }else{ ?>
+  <tr>
+    <td colspan="5" height="70">Giỏ hàng của bạn hiện tại không có gì!</td>
+  </tr>
+  <?php } ?>
+  <tr>
+  	<td colspan="3" style="font-weight:bold">Tổng tiền:</td>
+    <td style="font-weight:bold"><?php echo number_format($sum); ?></td>
+  </tr>
+  
+</table>
+	<input style="font-weight:bold" type="submit" name="update" value="Cập nhật" style="margin-top:10px;padding:3px 5px" />
+
+    <input style="font-weight:bold" type="submit" name="order" value="Đặt hàng" style="margin-top:10px;padding:3px 5px" />
+    <?php require("orders.php");?>
+</form>
+<div style="height:30px"></div>
+<a href="delCart.php?type=all" style="font-weight:bold">Xoá giỏ hàng</a> <a href="../../index.php" style="margin-left:20px;font-weight:bold">Mua thêm hàng</a>
+</div>
+</body>
+</html>

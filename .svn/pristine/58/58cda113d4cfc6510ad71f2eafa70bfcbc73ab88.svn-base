@@ -1,0 +1,322 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.12
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 01, 2014 at 06:52 AM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.11
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `bksun`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_categories` (
+  `cate_id` int(10) NOT NULL AUTO_INCREMENT,
+  `cate_name` varchar(100) NOT NULL,
+  `cate_info` varchar(100) NOT NULL,
+  `cate_status` int(1) NOT NULL,
+  PRIMARY KEY (`cate_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `tbl_categories`
+--
+
+INSERT INTO `tbl_categories` (`cate_id`, `cate_name`, `cate_info`, `cate_status`) VALUES
+(1, 'IC', 'IC giá rẻ nhất Đông Dương', 1),
+(2, 'LED', 'Đèn LED trái tim, mạch vòng... các loại', 1),
+(3, 'PIN', 'Pin sống lâu vĩnh cửu cùng năm tháng', 1),
+(4, 'TỤ ĐIỆN', 'Tụ điện tụ cả năng lượng thế giới', 0),
+(5, 'ĐIỆN TRỞ', 'Điện trở dù khó khăn trắc trở vẫn cản trở tốt dòng điện!', 1),
+(6, 'MẠCH NẠP', 'Mạch nạp hỗ trợ nạp điện cực tốt!', 1),
+(7, 'THẠCH ANH', 'Thạch anh đẹp như kim cương', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_comments`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_comments` (
+  `cmt_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cmt_content` text CHARACTER SET utf8 NOT NULL,
+  `cmt_date` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `pro_id` int(10) NOT NULL,
+  PRIMARY KEY (`cmt_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Dumping data for table `tbl_comments`
+--
+
+INSERT INTO `tbl_comments` (`cmt_id`, `cmt_content`, `cmt_date`, `pro_id`) VALUES
+(9, '', '21/10/2013 - 11:09:27', 0),
+(10, '', '21/10/2013 - 11:09:29', 0),
+(11, '', '21/10/2013 - 11:09:30', 0),
+(12, '', '21/10/2013 - 11:09:34', 0),
+(13, '', '21/10/2013 - 11:09:39', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_customers`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_customers` (
+  `cus_id` int(11) NOT NULL,
+  `cus_content` longtext NOT NULL,
+  PRIMARY KEY (`cus_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_customers`
+--
+
+INSERT INTO `tbl_customers` (`cus_id`, `cus_content`) VALUES
+(1, 'Lấy tay lau những dòng nước trên gương mặt lam lũ, bà Trung bảo đời mình đã khổ, dù phải cầm cố nhà, phải bán đến viên ngói cuối cùng cũng quyết để cậu út được đến giảng đường. Ngôi nhà cấp 4 nhỏ bé, lụp xụp của gia đình ông Trần Văn Như (62 tuổi, thôn Nam Trung, xã Trung Lễ, huyện Đức Thọ, tỉnh Hà Tĩnh) mấy hôm nay rất đông người tới chúc mừng. Con trai ông, Trần Văn Cường (lớp 12A, THPT Trần Phú) vừa trở thành thủ khoa của ĐH Bách khoa TPHCM với 28,25 điểm (Toán: 9, Lý: 9.25, Hóa: 10). Dáng người nhỏ thó, khuôn mặt hiền từ, Cường cười buồn khi tâm sự về ngôi thủ khoa trường đại học danh tiếng. "Khi thi xong khối A, em dự tính được 28 điểm và tin rằng sẽ đỗ đại học. Nhưng trên đường về nhà, em chỉ nghĩ tới bố mẹ tuổi già sức yếu, không biết sẽ lấy tiền đâu cho em nhập trường", Cường cúi mặt nói.\r\nNhà nghèo nên suốt 3 năm THPT, Cường không hề đi học thêm mà chỉ đến trường và về nhà tự ôn tập. Kết quả, cậu đạt giải Nhất học sinh giỏi cấp tỉnh lớp 10; giải Nhì khi học lớp 11 và giải Ba môn Toán Quốc gia năm lớp 12. Chia sẻ về bí quyết học tập, Cường bảo các môn tự nhiên cần rèn luyện khả năng tư duy lô gíc. Khi học ở trường em chú ý nghe giảng, về nhà làm bài tập trong sách nâng cao rồi xâu chuỗi các công thức của 3 môn học lại thành sơ đồ cho dễ nhớ. "Cường có tố chất rất đặc biệt về môn Toán. Cường không học nhiều như các bạn khác mà chỉ nhìn qua sách là sẽ nhớ được vanh vách các công thức để vận dụng vào bài làm. Em luôn biết vượt lên mọi hoàn cảnh và sống hòa đồng với mọi người", thầy Phạm Đăng Nhân, Phó hiệu trưởng trường THPT Trần phú, cũng là giáo viên dạy Toán của Cường nhận xét. Biết hoàn cảnh của gia đình Cường, mỗi đầu năm học, thầy cô và bạn bè lại góp tiền mua giúp em sách vở, dụng cụ học tập. Cũng vì cái nghèo mà có lần được gọi đi ôn đội tuyển Quốc gia, nam sinh này đã từ chối. Cường tâm sự nhiều đêm nghĩ tới bố mẹ mà em rơi nước mắt. Bố vẫn mãi chỉ biết ngồi im lơ đãng, mẹ giờ già yếu, mọi công việc đều trông chờ vào Cường. Cứ sau mỗi buổi đi học, cậu lại về nhà chăn trâu, cắt cỏ, cấy gặt giúp mẹ. Cây sáo là thứ giúp em giải tỏa căng thẳng trong học hành và tìm thấy sự lạc quan khi nhìn về tương lai phía trước. Nói đến tương lai, mẹ Cường lại khóc thành tiếng. Bà bảo, khi được con trai báo tin đỗ thủ khoa, bà ứa nước mắt. Ông bố vẫn ngồi im, đưa ánh mắt ngơ ngơ nhìn xung quanh. "Tôi vui và tự hào lắm nhưng cũng buồn khôn xiết. Sắp tới em nó đi học, không biết lấy gì cho con nhập trường đây. Gia đình chẳng còn gì để bán nữa. Thôi thì nếu đến bữa không vay mượn được, tôi đành cầm cố sổ đỏ. Còn những viên ngói cuối cùng trên mái nhà, tôi cũng gỡ để bán lấy tiền cho con vào giảng đường". Ngoài ĐH Bách khoa, năm nay Cường cũng thi ĐH Y Hà Nội. Cậu dự đoán sẽ được trên 28 điểm, khả năng đậu ngành Y đa khoa. "Nếu may mắn đỗ hai trường em cũng không biết học trường nào. ĐH Bách khoa chỉ học 5 năm, trong khi trường Y em yêu thích phải cần đến 6 năm trên giảng đường. Em sợ mẹ sẽ không có tiền để trụ nổi", Cường chia sẻ.\r\nThủ khoa ĐH Bách khoa TP HCM là con út trong gia đình có 5 anh chị em trong gia đình nghèo nhất xã Trung Lễ, huyện Đức Thọ, tỉnh Hà Tĩnh. Các anh chị của Cường vì cái đói cũng phải rời quê hương vào miền nam làm ăn. Trong ngôi nhà lụp xụp với những chiếc ghế cũ, một số ít bát đũa đã được sắm từ lâu, những tấm giấy khen và bảng thành tích của cậu được bố mẹ treo khắp nơi. Chiếc giường cũng là bàn học của Cường. Bà Nguyễn Thị Trung (58 tuổi, mẹ Cường) cho biết, chồng bị bệnh tim và mất trí nhớ gần 10 năm nay. Ngoài việc đi lại, ông không hề nhận thức được điều gì. Ai đến ông cũng ngồi im, hỏi gì ông cũng chỉ gật đầu, không nói. Mọi công việc trong gia đình đều do bà Trung và Cường gánh vác. Nguồn thu của cả nhà trông chờ vào 8 sào ruộng và vườn rau. "Mỗi ngày tôi thu được 20.000 đồng từ việc bán rau. Số tiền ấy tôi gom góp lại để trả tiền lãi vay ngân hàng, thỉnh thoảng trích ra mua tí cá, thịt, cải thiện bữa ăn cho gia đình. Nhiều khi gạo còn ít, tôi toàn nấu cháo, bỏ rau má, rau khoai vào ăn thay cơm", người mẹ với mái đầu đã nhiều sợi bạc nói trong nước mắt.'),
+(2, 'Lấy tay lau những dòng nước trên gương mặt lam lũ, bà Trung bảo đời mình đã khổ, dù phải cầm cố nhà, phải bán đến viên ngói cuối cùng cũng quyết để cậu út được đến giảng đường. Ngôi nhà cấp 4 nhỏ bé, lụp xụp của gia đình ông Trần Văn Như (62 tuổi, thôn Nam Trung, xã Trung Lễ, huyện Đức Thọ, tỉnh Hà Tĩnh) mấy hôm nay rất đông người tới chúc mừng. Con trai ông, Trần Văn Cường (lớp 12A, THPT Trần Phú) vừa trở thành thủ khoa của ĐH Bách khoa TPHCM với 28,25 điểm (Toán: 9, Lý: 9.25, Hóa: 10). Dáng người nhỏ thó, khuôn mặt hiền từ, Cường cười buồn khi tâm sự về ngôi thủ khoa trường đại học danh tiếng. "Khi thi xong khối A, em dự tính được 28 điểm và tin rằng sẽ đỗ đại học. Nhưng trên đường về nhà, em chỉ nghĩ tới bố mẹ tuổi già sức yếu, không biết sẽ lấy tiền đâu cho em nhập trường", Cường cúi mặt nói.\r\nNhà nghèo nên suốt 3 năm THPT, Cường không hề đi học thêm mà chỉ đến trường và về nhà tự ôn tập. Kết quả, cậu đạt giải Nhất học sinh giỏi cấp tỉnh lớp 10; giải Nhì khi học lớp 11 và giải Ba môn Toán Quốc gia năm lớp 12. Chia sẻ về bí quyết học tập, Cường bảo các môn tự nhiên cần rèn luyện khả năng tư duy lô gíc. Khi học ở trường em chú ý nghe giảng, về nhà làm bài tập trong sách nâng cao rồi xâu chuỗi các công thức của 3 môn học lại thành sơ đồ cho dễ nhớ. "Cường có tố chất rất đặc biệt về môn Toán. Cường không học nhiều như các bạn khác mà chỉ nhìn qua sách là sẽ nhớ được vanh vách các công thức để vận dụng vào bài làm. Em luôn biết vượt lên mọi hoàn cảnh và sống hòa đồng với mọi người", thầy Phạm Đăng Nhân, Phó hiệu trưởng trường THPT Trần phú, cũng là giáo viên dạy Toán của Cường nhận xét. Biết hoàn cảnh của gia đình Cường, mỗi đầu năm học, thầy cô và bạn bè lại góp tiền mua giúp em sách vở, dụng cụ học tập. Cũng vì cái nghèo mà có lần được gọi đi ôn đội tuyển Quốc gia, nam sinh này đã từ chối. Cường tâm sự nhiều đêm nghĩ tới bố mẹ mà em rơi nước mắt. Bố vẫn mãi chỉ biết ngồi im lơ đãng, mẹ giờ già yếu, mọi công việc đều trông chờ vào Cường. Cứ sau mỗi buổi đi học, cậu lại về nhà chăn trâu, cắt cỏ, cấy gặt giúp mẹ. Cây sáo là thứ giúp em giải tỏa căng thẳng trong học hành và tìm thấy sự lạc quan khi nhìn về tương lai phía trước. Nói đến tương lai, mẹ Cường lại khóc thành tiếng. Bà bảo, khi được con trai báo tin đỗ thủ khoa, bà ứa nước mắt. Ông bố vẫn ngồi im, đưa ánh mắt ngơ ngơ nhìn xung quanh. "Tôi vui và tự hào lắm nhưng cũng buồn khôn xiết. Sắp tới em nó đi học, không biết lấy gì cho con nhập trường đây. Gia đình chẳng còn gì để bán nữa. Thôi thì nếu đến bữa không vay mượn được, tôi đành cầm cố sổ đỏ. Còn những viên ngói cuối cùng trên mái nhà, tôi cũng gỡ để bán lấy tiền cho con vào giảng đường". Ngoài ĐH Bách khoa, năm nay Cường cũng thi ĐH Y Hà Nội. Cậu dự đoán sẽ được trên 28 điểm, khả năng đậu ngành Y đa khoa. "Nếu may mắn đỗ hai trường em cũng không biết học trường nào. ĐH Bách khoa chỉ học 5 năm, trong khi trường Y em yêu thích phải cần đến 6 năm trên giảng đường. Em sợ mẹ sẽ không có tiền để trụ nổi", Cường chia sẻ.\r\nThủ khoa ĐH Bách khoa TP HCM là con út trong gia đình có 5 anh chị em trong gia đình nghèo nhất xã Trung Lễ, huyện Đức Thọ, tỉnh Hà Tĩnh. Các anh chị của Cường vì cái đói cũng phải rời quê hương vào miền nam làm ăn. Trong ngôi nhà lụp xụp với những chiếc ghế cũ, một số ít bát đũa đã được sắm từ lâu, những tấm giấy khen và bảng thành tích của cậu được bố mẹ treo khắp nơi. Chiếc giường cũng là bàn học của Cường. Bà Nguyễn Thị Trung (58 tuổi, mẹ Cường) cho biết, chồng bị bệnh tim và mất trí nhớ gần 10 năm nay. Ngoài việc đi lại, ông không hề nhận thức được điều gì. Ai đến ông cũng ngồi im, hỏi gì ông cũng chỉ gật đầu, không nói. Mọi công việc trong gia đình đều do bà Trung và Cường gánh vác. Nguồn thu của cả nhà trông chờ vào 8 sào ruộng và vườn rau. "Mỗi ngày tôi thu được 20.000 đồng từ việc bán rau. Số tiền ấy tôi gom góp lại để trả tiền lãi vay ngân hàng, thỉnh thoảng trích ra mua tí cá, thịt, cải thiện bữa ăn cho gia đình. Nhiều khi gạo còn ít, tôi toàn nấu cháo, bỏ rau má, rau khoai vào ăn thay cơm", người mẹ với mái đầu đã nhiều sợi bạc nói trong nước mắt.'),
+(3, 'Lấy tay lau những dòng nước trên gương mặt lam lũ, bà Trung bảo đời mình đã khổ, dù phải cầm cố nhà, phải bán đến viên ngói cuối cùng cũng quyết để cậu út được đến giảng đường. Ngôi nhà cấp 4 nhỏ bé, lụp xụp của gia đình ông Trần Văn Như (62 tuổi, thôn Nam Trung, xã Trung Lễ, huyện Đức Thọ, tỉnh Hà Tĩnh) mấy hôm nay rất đông người tới chúc mừng. Con trai ông, Trần Văn Cường (lớp 12A, THPT Trần Phú) vừa trở thành thủ khoa của ĐH Bách khoa TPHCM với 28,25 điểm (Toán: 9, Lý: 9.25, Hóa: 10). Dáng người nhỏ thó, khuôn mặt hiền từ, Cường cười buồn khi tâm sự về ngôi thủ khoa trường đại học danh tiếng. "Khi thi xong khối A, em dự tính được 28 điểm và tin rằng sẽ đỗ đại học. Nhưng trên đường về nhà, em chỉ nghĩ tới bố mẹ tuổi già sức yếu, không biết sẽ lấy tiền đâu cho em nhập trường", Cường cúi mặt nói.\r\nNhà nghèo nên suốt 3 năm THPT, Cường không hề đi học thêm mà chỉ đến trường và về nhà tự ôn tập. Kết quả, cậu đạt giải Nhất học sinh giỏi cấp tỉnh lớp 10; giải Nhì khi học lớp 11 và giải Ba môn Toán Quốc gia năm lớp 12. Chia sẻ về bí quyết học tập, Cường bảo các môn tự nhiên cần rèn luyện khả năng tư duy lô gíc. Khi học ở trường em chú ý nghe giảng, về nhà làm bài tập trong sách nâng cao rồi xâu chuỗi các công thức của 3 môn học lại thành sơ đồ cho dễ nhớ. "Cường có tố chất rất đặc biệt về môn Toán. Cường không học nhiều như các bạn khác mà chỉ nhìn qua sách là sẽ nhớ được vanh vách các công thức để vận dụng vào bài làm. Em luôn biết vượt lên mọi hoàn cảnh và sống hòa đồng với mọi người", thầy Phạm Đăng Nhân, Phó hiệu trưởng trường THPT Trần phú, cũng là giáo viên dạy Toán của Cường nhận xét. Biết hoàn cảnh của gia đình Cường, mỗi đầu năm học, thầy cô và bạn bè lại góp tiền mua giúp em sách vở, dụng cụ học tập. Cũng vì cái nghèo mà có lần được gọi đi ôn đội tuyển Quốc gia, nam sinh này đã từ chối. Cường tâm sự nhiều đêm nghĩ tới bố mẹ mà em rơi nước mắt. Bố vẫn mãi chỉ biết ngồi im lơ đãng, mẹ giờ già yếu, mọi công việc đều trông chờ vào Cường. Cứ sau mỗi buổi đi học, cậu lại về nhà chăn trâu, cắt cỏ, cấy gặt giúp mẹ. Cây sáo là thứ giúp em giải tỏa căng thẳng trong học hành và tìm thấy sự lạc quan khi nhìn về tương lai phía trước. Nói đến tương lai, mẹ Cường lại khóc thành tiếng. Bà bảo, khi được con trai báo tin đỗ thủ khoa, bà ứa nước mắt. Ông bố vẫn ngồi im, đưa ánh mắt ngơ ngơ nhìn xung quanh. "Tôi vui và tự hào lắm nhưng cũng buồn khôn xiết. Sắp tới em nó đi học, không biết lấy gì cho con nhập trường đây. Gia đình chẳng còn gì để bán nữa. Thôi thì nếu đến bữa không vay mượn được, tôi đành cầm cố sổ đỏ. Còn những viên ngói cuối cùng trên mái nhà, tôi cũng gỡ để bán lấy tiền cho con vào giảng đường". Ngoài ĐH Bách khoa, năm nay Cường cũng thi ĐH Y Hà Nội. Cậu dự đoán sẽ được trên 28 điểm, khả năng đậu ngành Y đa khoa. "Nếu may mắn đỗ hai trường em cũng không biết học trường nào. ĐH Bách khoa chỉ học 5 năm, trong khi trường Y em yêu thích phải cần đến 6 năm trên giảng đường. Em sợ mẹ sẽ không có tiền để trụ nổi", Cường chia sẻ.\r\nThủ khoa ĐH Bách khoa TP HCM là con út trong gia đình có 5 anh chị em trong gia đình nghèo nhất xã Trung Lễ, huyện Đức Thọ, tỉnh Hà Tĩnh. Các anh chị của Cường vì cái đói cũng phải rời quê hương vào miền nam làm ăn. Trong ngôi nhà lụp xụp với những chiếc ghế cũ, một số ít bát đũa đã được sắm từ lâu, những tấm giấy khen và bảng thành tích của cậu được bố mẹ treo khắp nơi. Chiếc giường cũng là bàn học của Cường. Bà Nguyễn Thị Trung (58 tuổi, mẹ Cường) cho biết, chồng bị bệnh tim và mất trí nhớ gần 10 năm nay. Ngoài việc đi lại, ông không hề nhận thức được điều gì. Ai đến ông cũng ngồi im, hỏi gì ông cũng chỉ gật đầu, không nói. Mọi công việc trong gia đình đều do bà Trung và Cường gánh vác. Nguồn thu của cả nhà trông chờ vào 8 sào ruộng và vườn rau. "Mỗi ngày tôi thu được 20.000 đồng từ việc bán rau. Số tiền ấy tôi gom góp lại để trả tiền lãi vay ngân hàng, thỉnh thoảng trích ra mua tí cá, thịt, cải thiện bữa ăn cho gia đình. Nhiều khi gạo còn ít, tôi toàn nấu cháo, bỏ rau má, rau khoai vào ăn thay cơm", người mẹ với mái đầu đã nhiều sợi bạc nói trong nước mắt.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_documents`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_documents` (
+  `doc_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `doc_title` longtext NOT NULL,
+  `doc_content` longtext NOT NULL,
+  `doc_type` varchar(50) NOT NULL,
+  `doc_vip` int(11) NOT NULL,
+  PRIMARY KEY (`doc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `tbl_documents`
+--
+
+INSERT INTO `tbl_documents` (`doc_id`, `doc_title`, `doc_content`, `doc_type`, `doc_vip`) VALUES
+(1, 'tai lieu pin 1', 'noi dung tai lieu pin so 1', 'pin', 0),
+(2, 'tai lieu pin 2', 'noi dung tai lieu pin so 2', 'pin', 1),
+(3, 'tai lieu led 1', 'noi dung tai lieu led so 1', 'led', 1),
+(4, 'tai lieu led 2', 'noi dung tai lieu led so 2', 'led', 0),
+(5, 'thu thuat 1', 'noi dung tai lieu thu thuat so 1', 'trick', 0),
+(6, 'tai lieu pin 3', 'noi dung tai lieu pin so 3', 'pin', 1),
+(7, 'tai lieu led 3', 'noi dung tai lieu led so 3', 'led', 0),
+(8, 'thu thuat 2', 'noi ung thu thuat so 2', 'trick', 1),
+(9, 'thu thuat 3', 'noi dung thu thuat so 3', 'trick', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_intro`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_intro` (
+  `intro_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `intro_content` longtext NOT NULL,
+  PRIMARY KEY (`intro_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `tbl_intro`
+--
+
+INSERT INTO `tbl_intro` (`intro_id`, `intro_content`) VALUES
+(1, 'Nhóm BKSun hay còn gọi là nhóm 5 anh em siêu nhân'),
+(2, 'Liên hệ với chúng tôi qua Bách Khoa');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_orders`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_orders` (
+  `order_id` int(10) NOT NULL AUTO_INCREMENT,
+  `pro_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `order_date` datetime NOT NULL,
+  `order_number` int(10) NOT NULL,
+  `order_status` tinyint(1) NOT NULL,
+  `order_notice` int(11) DEFAULT NULL,
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tbl_orders`
+--
+
+INSERT INTO `tbl_orders` (`order_id`, `pro_id`, `user_id`, `order_date`, `order_number`, `order_status`, `order_notice`) VALUES
+(1, 1, 1, '2014-07-15 15:03:32', 2, 0, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_products`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_products` (
+  `pro_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `pro_name` varchar(200) CHARACTER SET utf8 NOT NULL,
+  `pro_price` varchar(100) NOT NULL,
+  `pro_info` text CHARACTER SET utf8 NOT NULL,
+  `pro_full` longtext CHARACTER SET utf8 NOT NULL,
+  `pro_image` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `pro_number` int(10) NOT NULL,
+  `pro_import` date NOT NULL,
+  `cate_id` int(10) NOT NULL,
+  `pro_hot` int(11) NOT NULL,
+  `pro_new` int(11) NOT NULL,
+  PRIMARY KEY (`pro_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_products`
+--
+
+INSERT INTO `tbl_products` (`pro_id`, `pro_name`, `pro_price`, `pro_info`, `pro_full`, `pro_image`, `pro_number`, `pro_import`, `cate_id`, `pro_hot`, `pro_new`) VALUES
+(1, 'LM2596S-ADJ', '3500', 'Thương hiệu sản phẩm: Mỹ', 'VCC: 0.5V\r\nVIH: 3V\r\nVOL: 2V', 'ic1.jpg', 10, '2014-07-08', 1, 0, 1),
+(2, 'MC34063AD', '2000', 'Thương hiệu sản phẩm:  China', 'VCC: 0.5V\r\nVIH: 3V\r\nVOL: 2V', 'ic2.jpg', 20, '2014-07-24', 1, 1, 1),
+(3, ' UA7805CKCS', '900000', 'Thương hiệu sản phẩm:  China', 'VCC: 0.5V\r\nVIH: 3V\r\nVOL: 2V', 'ic3.jpg', 30, '2014-07-03', 1, 0, 0),
+(4, 'TLV1117LV33DCYR ', '6000', 'Thương hiệu sản phẩm: Việt Nam', 'VCC: 0.5V\r\nVIH: 3V\r\nVOL: 2V', 'ic4.jpg', 20, '2014-07-10', 1, 1, 1),
+(5, 'TPS3823-33DBVR', '18000', 'Thương hiệu sản phẩm: Việt Nam', 'VCC: 0.5V\r\nVIH: 3V\r\nVOL: 2V', 'ic5.jpg', 20, '2014-07-11', 1, 0, 0),
+(6, 'TPS54260QDGQRQ1 ', '30000', 'Thương hiệu sản phẩm: Mỹ', 'VCC: 0.5V\r\nVIH: 3V\r\nVOL: 2V', 'ic6.jpg', 30, '2014-07-10', 1, 0, 1),
+(7, '78L05', '40000', 'Thương hiệu sản phẩm: Việt Nam', 'VCC: 0.5V\r\nVIH: 3V\r\nVOL: 2V', 'ic7.jpg', 43, '2014-07-23', 1, 0, 0),
+(8, 'AMS1117-3.3', '50000', 'Thương hiệu sản phẩm:  China', 'VCC: 0.5V\r\nVIH: 3V\r\nVOL: 2V', 'ic8.jpg', 43, '2014-07-09', 1, 0, 1),
+(9, 'TPS73733DCQ ', '90000', 'Thương hiệu sản phẩm: Việt Nam', 'VCC: 0.5V\r\nVIH: 3V\r\nVOL: 2V', 'ic9.jpg', 54, '2014-07-02', 1, 1, 1),
+(10, 'TPS7A4533DCQR ', '150000', 'Thương hiệu sản phẩm: Mỹ', 'VCC: 0.5V\r\nVIH: 3V\r\nVOL: 2V', 'ic10.jpg', 32, '2014-07-09', 1, 0, 0),
+(11, 'LCD1602A-GY', '3500', 'Thương hiệu sản phẩm: Việt Nam', 'CRI: < 60\r\nLed driver: DC\r\nMàu: Đỏ', 'led1.jpg', 20, '2014-07-16', 2, 1, 0),
+(12, 'LED AVR 16 KÊNH 20A', '75000', 'Thương hiệu sản phẩm:  China', 'CRI: < 60\r\nLed driver: DC\r\nMàu: Đỏ', 'led2.jpg', 32, '2014-07-09', 2, 1, 1),
+(13, ' LED 0805 Blue', '8000', 'Thương hiệu sản phẩm:  China', 'CRI: < 60\r\nLed driver: DC\r\nMàu: Đỏ', 'led3.jpg', 21, '2014-07-30', 2, 0, 0),
+(14, 'LED 0805 Red', '5000', 'Thương hiệu sản phẩm: Việt Nam', 'CRI: < 60\r\nLed driver: DC\r\nMàu: Đỏ', 'led4.jpg', 32, '2014-07-04', 2, 1, 0),
+(15, 'LED 3mm Green', '3000', 'Thương hiệu sản phẩm: Mỹ', 'CRI: < 60\r\nLed driver: DC\r\nMàu: Đỏ', 'led5.jpg', 43, '2014-07-10', 2, 0, 1),
+(16, 'LED 3mm Yellow', '3000', 'Thương hiệu sản phẩm:  Japan', 'CRI: < 60\r\nLed driver: DC\r\nMàu: Đỏ', 'led6.jpg', 12, '2014-07-31', 2, 0, 0),
+(17, ' LED 3mm Red', '3000', 'Thương hiệu sản phẩm: Việt Nam', 'CRI: < 60\r\nLed driver: DC\r\nMàu: Đỏ', 'led7.jpg', 32, '2014-07-30', 2, 1, 0),
+(18, 'Led 7 Anot ', '2500', 'Thương hiệu sản phẩm: Mỹ', 'CRI: < 60\r\nLed driver: DC\r\nMàu: Đỏ', 'led8.jpg', 12, '2014-07-16', 2, 0, 1),
+(19, ' Led 7 x 4 Digit ', '12000', 'Thương hiệu sản phẩm: Việt Nam', 'CRI: < 60\r\nLed driver: DC\r\nMàu: Đỏ', 'led9.jpg', 21, '2014-07-30', 2, 0, 0),
+(20, 'Module LCD Nokia 5510', '75000', 'Thương hiệu sản phẩm:  Japan', 'Số chân: 3\r\nĐiện trở: 0.5 Ω\r\nSai số: 10%', 'led10.jpg', 34, '2014-07-09', 2, 1, 1),
+(21, 'Biến Trở B102 1K 16X2MM', '3000', 'Thương hiệu sản phẩm: Việt Nam', 'Số chân: 3\r\nĐiện trở: 0.5 Ω\r\nSai số: 10%', 'dt1.jpg', 100, '2014-07-18', 5, 1, 0),
+(22, 'Trở Băng 1K A07-102', '1000', 'Thương hiệu sản phẩm:  China', 'Số chân: 3\r\nĐiện trở: 0.5 Ω\r\nSai số: 10%', 'dt2.jpg', 50, '2014-07-18', 5, 0, 1),
+(23, 'Trở Dán 2512 3.3K ', '500', 'Thương hiệu sản phẩm:  China', 'Số chân: 3\r\nĐiện trở: 0.5 Ω\r\nSai số: 10%', 'dt3.jpg', 100, '2014-07-18', 5, 1, 0),
+(24, 'Trở Dán 2512 2.2K', '6000', 'Thương hiệu sản phẩm: Việt Nam', 'Số chân: 3\r\nĐiện trở: 0.5 Ω\r\nSai số: 10%', 'dt4.jpg', 150, '2014-07-18', 5, 0, 0),
+(25, 'Trở Dán 2512 1K', '500', 'Thương hiệu sản phẩm:  China', 'Số chân: 3\r\nĐiện trở: 0.5 Ω\r\nSai số: 10%', 'dt5.jpg', 300, '2014-07-18', 5, 1, 0),
+(26, 'Trở Dán 2512 10K', '500', 'Thương hiệu sản phẩm: Việt Nam', 'Số chân: 3\r\nĐiện trở: 0.5 Ω\r\nSai số: 10%', 'dt6.jpg', 100, '2014-07-18', 5, 0, 1),
+(27, 'Trở Dán 2512 100K', '500', 'Thương hiệu sản phẩm:  Japan', 'Số chân: 3\r\nĐiện trở: 0.5 Ω\r\nSai số: 10%', 'dt7.jpg', 100, '2014-07-18', 5, 1, 0),
+(28, 'NTC-MF52AT 100K', '5000', 'Thương hiệu sản phẩm:  China', 'Số chân: 3\r\nĐiện trở: 0.5 Ω\r\nSai số: 10%', 'dt8.jpg', 150, '2014-07-18', 5, 0, 0),
+(29, 'Biến Trở RK097G B10K', '10000', 'Thương hiệu sản phẩm:  China', 'Số chân: 3\r\nĐiện trở: 0.5 Ω\r\nSai số: 10%', 'dt9.jpg', 100, '2014-07-18', 5, 1, 0),
+(30, 'Dây Đo Nhiệt Độ NTC MF58', '25000', 'Thương hiệu sản phẩm:  Japan', 'Số chân: 3\r\nĐiện trở: 0.5 Ω\r\nSai số: 10%', 'dt10.jpg', 100, '2014-07-18', 5, 0, 0),
+(31, 'Mạch Nạp USB FPGA Xilinx', '980000', 'Thương hiệu sản phẩm:  Japan', 'Điện áp: 15V\r\nĐường kính 16.2mm, Cao 34.5mm\r\nGiao tiếp qua cổng: USB', 'mn1.jpg', 50, '2014-07-18', 6, 1, 0),
+(32, 'MSP430 LaunchPad', '6000', 'Thương hiệu sản phẩm: Mỹ', 'Điện áp: 15V\r\nĐường kính 16.2mm, Cao 34.5mm\r\nGiao tiếp qua cổng: USB', 'mn2.jpg', 50, '2014-07-18', 6, 1, 0),
+(33, 'Mạch Nạp 89C SP200 MH', '200000', 'Thương hiệu sản phẩm:  China', 'Điện áp: 15V\r\nĐường kính 16.2mm, Cao 34.5mm\r\nGiao tiếp qua cổng: USB', 'mn3.jpg', 50, '2014-07-18', 6, 0, 1),
+(34, 'Tiva™ C Series TM4C123G LaunchPad', '3500', 'Thương hiệu sản phẩm:  Mỹ', 'Điện áp: 15V\r\nĐường kính 16.2mm, Cao 34.5mm\r\nGiao tiếp qua cổng: USB', 'mn4.jpg', 150, '2014-07-18', 6, 1, 0),
+(35, 'Mạch Nạp MSP430', '900000', 'Thương hiệu sản phẩm:  Mỹ', 'Điện áp: 15V\r\nĐường kính 16.2mm, Cao 34.5mm\r\nGiao tiếp qua cổng: USB', 'mn5.jpg', 50, '2014-07-18', 6, 1, 0),
+(36, 'Mạch Nạp STC', '150000', 'Thương hiệu sản phẩm: Mỹ', 'Điện áp: 15V\r\nĐường kính 16.2mm, Cao 34.5mm\r\nGiao tiếp qua cổng: USB', 'mn6.jpg', 150, '2014-07-18', 6, 0, 0),
+(37, 'MSP430F5529 USB LaunchPad', '80000', 'Thương hiệu sản phẩm: Việt Nam', 'Điện áp: 15V\r\nĐường kính 16.2mm, Cao 34.5mm\r\nGiao tiếp qua cổng: USB', 'mn7.jpg', 150, '2014-07-18', 6, 1, 1),
+(38, 'Mini Kit MSP430F5510', '60000', 'Thương hiệu sản phẩm: Việt Nam', 'Điện áp: 15V\r\nĐường kính 16.2mm, Cao 34.5mm\r\nGiao tiếp qua cổng: USB', 'mn8.jpg', 50, '2014-07-18', 6, 1, 0),
+(39, 'Mạch Nạp Jlink MH', '250000', 'Thương hiệu sản phẩm:  Japan', 'Điện áp: 15V\r\nĐường kính 16.2mm, Cao 34.5mm\r\nGiao tiếp qua cổng: USB', 'mn9.jpg', 150, '2014-07-18', 6, 0, 0),
+(40, 'Mạch Nạp LED Quảng Cáo MH-isp', '210000', 'Thương hiệu sản phẩm:  Japan', 'Điện áp: 15V\r\nĐường kính 16.2mm, Cao 34.5mm\r\nGiao tiếp qua cổng: USB', 'mn10.jpg', 50, '2014-07-18', 6, 0, 0),
+(41, 'Thạch Anh 16Mhz 49S SMD', '2500', 'Thương hiệu sản phẩm:  China', 'Tần số Transmitter: 308.160\r\nTần số Receiver: 318.860', 'ta1.jpg', 200, '2014-07-18', 7, 0, 0),
+(42, 'Thạch Anh 24Mhz 49S SMD', '2000', 'Thương hiệu sản phẩm: Việt Nam', 'Tần số Transmitter: 308.160\r\nTần số Receiver: 318.860', 'ta2.jpg', 150, '2014-07-18', 7, 1, 0),
+(43, 'Thạch anh 32.768KHZ 2x6MM', '2500', 'Thương hiệu sản phẩm:  China', 'Tần số Transmitter: 308.160\r\nTần số Receiver: 318.860', 'ta3.jpg', 150, '2014-07-18', 7, 1, 0),
+(44, 'Thạch Anh 12Mhz 3 Chân', '2000', 'Thương hiệu sản phẩm: Mỹ', 'Tần số Transmitter: 308.160\r\nTần số Receiver: 318.860', 'ta4.jpg', 200, '2014-07-18', 7, 0, 1),
+(45, 'Thạch Anh 8Mhz 3 Chân', '2500', 'Thương hiệu sản phẩm:  China', 'Tần số Transmitter: 308.160\r\nTần số Receiver: 318.860', 'ta5.jpg', 150, '2014-07-18', 7, 0, 0),
+(46, 'Tấm Lót Thạch Anh 49S', '500', 'Thương hiệu sản phẩm:  Japan', 'Tần số Transmitter: 308.160\r\nTần số Receiver: 318.860', 'ta6.jpg', 150, '2014-07-18', 7, 0, 0),
+(47, 'Thạch Anh 7.3728Mhz 49S SMD', '6000', 'Thương hiệu sản phẩm:  China', 'Tần số Transmitter: 308.160\r\nTần số Receiver: 318.860', 'ta7.jpg', 200, '2014-07-18', 7, 1, 0),
+(48, 'Thạch Anh 24Mhz 49S DIP', '2000', 'Thương hiệu sản phẩm:  Japan', 'Tần số Transmitter: 308.160\r\nTần số Receiver: 318.860', 'ta8.jpg', 150, '2014-07-18', 7, 1, 0),
+(49, 'Thạch Anh 12Mhz 49S SMD', '2500', 'Thương hiệu sản phẩm:  China', 'Tần số Transmitter: 308.160\r\nTần số Receiver: 318.860', 'ta9.jpg', 200, '2014-07-18', 7, 0, 0),
+(50, 'Thạch anh 4Mhz 49S SMD', '2500', 'Thương hiệu sản phẩm:  China', 'Tần số Transmitter: 308.160\r\nTần số Receiver: 318.860', 'ta10.jpg', 150, '2014-07-18', 7, 1, 0),
+(51, 'PIN ER6C (AA) F2-40BL', '350000', 'Thương hiệu sản phẩm: Việt Nam', 'Điện áp ra 3.7V\r\nSạc với các mạch sạc 3.7V TP4056\r\nĐường kính 16.2mm, Cao 34.5mm\r\n', 'pin1.jpg', 200, '2014-07-18', 3, 0, 1),
+(52, 'Sạc Thông Minh POWERLINE 4 PRO', '1200000', 'Thương hiệu sản phẩm: Việt Nam', 'Điện áp ra 3.7V\r\nSạc với các mạch sạc 3.7V TP4056\r\nĐường kính 16.2mm, Cao 34.5mm\r\n', 'pin2.jpg', 150, '2014-07-18', 3, 0, 0),
+(53, 'Đế Pin Ultrafire 1AA 16340', '15000', 'Thương hiệu sản phẩm: Mỹ', 'Điện áp ra 3.7V\r\nSạc với các mạch sạc 3.7V TP4056\r\nĐường kính 16.2mm, Cao 34.5mm\r\n', 'pin3.jpg', 150, '2014-07-18', 3, 1, 1),
+(54, 'Hộp Đế Pin 9V', '3500', 'Thương hiệu sản phẩm: Việt Nam', 'Điện áp ra 3.7V\r\nSạc với các mạch sạc 3.7V TP4056\r\nĐường kính 16.2mm, Cao 34.5mm\r\n', 'pin4.jpg', 200, '2014-07-18', 3, 0, 0),
+(55, 'Đế Pin 12V 23A ( 27A )', '15000', 'Thương hiệu sản phẩm: Việt Nam', 'Điện áp ra 3.7V\r\nSạc với các mạch sạc 3.7V TP4056\r\nĐường kính 16.2mm, Cao 34.5mm\r\n', 'pin5.jpg', 150, '2014-07-18', 3, 1, 1),
+(56, 'Pin UltraFile 1200mAh 3.7V 16340 ( Giá 1 Viên)', '40000', 'Thương hiệu sản phẩm:  Japan', 'Điện áp ra 3.7V\r\nSạc với các mạch sạc 3.7V TP4056\r\nĐường kính 16.2mm, Cao 34.5mm\r\n', 'pin6.jpg', 150, '2014-07-18', 3, 0, 0),
+(57, 'Pin Sạc Camelion 9V', '90000', 'Thương hiệu sản phẩm: Việt Nam', 'Điện áp ra 3.7V\r\nSạc với các mạch sạc 3.7V TP4056\r\nĐường kính 16.2mm, Cao 34.5mm\r\n', 'pin7.jpg', 200, '2014-07-18', 3, 1, 1),
+(58, 'Pin Evereay 9V', '6000', 'Thương hiệu sản phẩm: Mỹ', 'Điện áp ra 3.7V\r\nSạc với các mạch sạc 3.7V TP4056\r\nĐường kính 16.2mm, Cao 34.5mm\r\n', 'pin8.jpg', 100, '2014-07-18', 3, 0, 0),
+(59, 'Pin ANSMANN AA-2 Viên\r\n( Không sạc)', '15000', 'Thương hiệu sản phẩm: Việt Nam', 'Điện áp ra 3.7V\r\nSạc với các mạch sạc 3.7V TP4056\r\nĐường kính 16.2mm, Cao 34.5mm\r\n', 'pin9.jpg', 200, '2014-07-18', 3, 1, 1),
+(60, 'Đế Pin Ultrafire 2 AA 18650', '15000', 'Thương hiệu sản phẩm:  China', 'Điện áp ra 3.7V\r\nSạc với các mạch sạc 3.7V TP4056\r\nĐường kính 16.2mm, Cao 34.5mm\r\n', 'pin10.jpg', 100, '2014-07-18', 3, 0, 1),
+(61, 'Tụ Nhôm 10uF 50V 5x5MM', '3000', 'Thương hiệu sản phẩm: Việt Nam', 'Điện dung: 47uF\r\nĐiện áp: 35V\r\nNhiệt độ: 30°C', 'tu1.jpg', 170, '2014-07-18', 4, 1, 0),
+(62, 'Tụ Nhôm 220uF 50V 10x10.2MM', '3500', 'Thương hiệu sản phẩm: Việt Nam', 'Điện dung: 57uF\r\nĐiện áp: 45V\r\nNhiệt độ: 35°C', 'tu2.jpg', 200, '2014-07-18', 4, 0, 0),
+(63, 'Tụ Nhôm 220UF 16V 6.3x7.7MM', '3000', 'Thương hiệu sản phẩm: Mỹ', 'Điện dung: 47uF\r\nĐiện áp: 35V\r\nNhiệt độ: 30°C', 'tu3.jpg', 170, '2014-07-18', 4, 1, 1),
+(64, 'Tụ Nhôm 330UF 25V 8x10.2MM', '150000', 'Thương hiệu sản phẩm:  China', 'Điện dung: 57uF\r\nĐiện áp: 45V\r\nNhiệt độ: 35°C', 'tu4.jpg', 200, '2014-07-18', 4, 0, 0),
+(65, 'Tụ Nhôm 330UF 50V 10x10.2MM', '3500', 'Thương hiệu sản phẩm:  Japan', 'Điện dung: 57uF\r\nĐiện áp: 45V\r\nNhiệt độ: 35°C', 'tu5.jpg', 100, '2014-07-18', 4, 1, 1),
+(66, 'Tụ Nhôm 470UF 25V 10x10.3MM', '6000', 'Thương hiệu sản phẩm: Việt Nam', 'Điện dung: 57uF\r\nĐiện áp: 45V\r\nNhiệt độ: 35°C', 'tu6.jpg', 200, '2014-07-18', 4, 0, 0),
+(67, 'Tụ Nhôm 100UF 50V 8x10.2MM', '50000', 'Thương hiệu sản phẩm: Mỹ', 'Điện dung: 47uF\r\nĐiện áp: 35V\r\nNhiệt độ: 30°C', 'tu7.jpg', 100, '2014-07-18', 4, 1, 1),
+(68, 'Tụ Nhôm 100uF 25V 6x7MM', '3500', 'Thương hiệu sản phẩm: Việt Nam', 'Điện dung: 57uF\r\nĐiện áp: 45V\r\nNhiệt độ: 35°C', 'tu8.jpg', 170, '2014-07-18', 4, 1, 0),
+(69, 'Tụ Nhôm 220UF 25V 8x10.2MM', '3500', 'Thương hiệu sản phẩm:  China', 'Điện dung: 57uF\r\nĐiện áp: 45V\r\nNhiệt độ: 35°C', 'tu9.jpg', 200, '2014-07-18', 4, 0, 1),
+(70, 'Tụ Nhôm 330UF 16V 8x10MM', '3000', 'Thương hiệu sản phẩm: Mỹ', 'Điện dung: 47uF\r\nĐiện áp: 35V\r\nNhiệt độ: 30°C', 'tu10.jpg', 100, '2014-07-18', 4, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_sales`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_sales` (
+  `sale_id` int(10) NOT NULL AUTO_INCREMENT,
+  `pro_id` int(11) NOT NULL,
+  `sale_percent` double NOT NULL,
+  `sale_price` int(10) NOT NULL,
+  `sale_start` date DEFAULT NULL,
+  `sale_end` date DEFAULT NULL,
+  `sale_notice` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`sale_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tbl_sales`
+--
+
+INSERT INTO `tbl_sales` (`sale_id`, `pro_id`, `sale_percent`, `sale_price`, `sale_start`, `sale_end`, `sale_notice`) VALUES
+(1, 6, 20, 9000, '2014-07-01', '2014-07-31', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_users`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_users` (
+  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(150) NOT NULL,
+  `user_pass` char(50) NOT NULL,
+  `user_fullname` varchar(100) NOT NULL,
+  `user_gender` int(1) NOT NULL DEFAULT '1',
+  `user_phone` varchar(100) NOT NULL,
+  `user_email` varchar(100) NOT NULL,
+  `user_level` int(1) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+
+--
+-- Dumping data for table `tbl_users`
+--
+
+INSERT INTO `tbl_users` (`user_id`, `user_name`, `user_pass`, `user_fullname`, `user_gender`, `user_phone`, `user_email`, `user_level`) VALUES
+(2, 'kiki', '827ccb0eea8a706c4c34a16891f84e7b', 'The kiki', 1, '0977123456', 'kizi@yahoo.com', 1),
+(11, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'ha anh don', 1, '0977123456', 'haanhdon@gmail.com', 1),
+(12, 'laphm', 'e10adc3949ba59abbe56e057f20f883e', 'lap', 1, '34134242', 'fhs@gmail.com', 2),
+(13, 'laphm1', '827ccb0eea8a706c4c34a16891f84e7b', 'lap', 1, 'gfdg', 'gfdg', 2),
+(14, 'cris', 'd41d8cd98f00b204e9800998ecf8427e', '', 1, '', '', 2);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

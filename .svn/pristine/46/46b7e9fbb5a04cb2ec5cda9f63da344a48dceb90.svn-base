@@ -1,0 +1,122 @@
+<?php require("../functions/user.php");?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+<style type="text/css">
+td{
+width:50;
+
+}
+tr{
+height:30px;	
+}
+div.table{
+width:1000;
+padding-top:20px;
+margin-top:20px;	
+}
+h3{
+padding-bottom:20px	
+}
+select,input{
+	height:27px;
+	width:200px;
+	margin-top:3px;
+	border-radius:5px;
+	
+}
+.pt{	
+	margin-left:150px;
+	margin-right:130px;
+	margin-top:250px;
+    box-shadow:5px 2px 5px #999999;
+}
+.title{
+	margin-top:20px;
+	height:100px;
+}
+fieldset{
+	margin:5px 250px 0px 250px;
+	border-radius:5px;
+	padding-bottom:10px;
+	background-color:#6F6;
+	box-shadow:5px 2px 5px #999999;
+}
+</style>
+<body>
+<?php
+	if(isset($_GET['id'])){
+		$user=new user();
+		$id=$_GET['id'];
+		$data=array();
+		$data=$user->showOne($id);	
+	}else header("location:http://localhost/bksun/admin/index.php?page=user&act=list");
+	$errors="";
+	$count=1;
+	if(isset($_POST['submit'])){
+		if($_POST['pass']!=NULL){
+			if(strlen($_POST['pass'])<6){
+				$errors="Mật khẩu phải lớn hơn 6 kí tự";
+				$count=$count+1;
+			}else{
+				$pass=md5($_POST['pass']);
+				$user->updateOne("user_pass",$pass,$id);
+			}
+		}
+		$level=$_POST['level'];
+		$user->updateOne("user_level",$level,$id);
+		if($count==1) header("location:http://localhost/bksun/admin/index.php?page=user&act=list");
+	}
+?>
+<div class="title" align="center"><h3>UPDATA USER <br /><?php echo $data['user_name']?></h3>
+	<?php echo "<a style='color:#F00'>".$errors."</a>"?>
+</div>
+<fieldset><legend>Thông tin người dùng</legend>
+<div align="center" class="table" >
+<form action="" method="post">
+<table width="300" border="0" align="center">
+	<tr>
+  		<td width="84" >USER</td>
+ 		<td width="178" > <input type="text" disabled="disabled" value="<?php echo $data['user_name']?>"/></td>
+	</tr>
+	<tr>
+  		<td >PASS</td> 
+		<td>  <input type="password" name="pass" /></td>
+ 	</tr>
+ 	<tr>
+		<td >FULLNAME</td> 
+		<td><input type="text" disabled="disabled" value="<?php echo $data['user_fullname']?>"/></td>
+	</tr>
+	<tr>
+		<td >GENDER</td>
+		<td><input type="text" disabled="disabled"  value="<?php if($data['user_gender']==1) echo "Nam"; else echo "Nữ";?>"/></td>	
+	</tr>
+	<tr>
+		<td>PHONE</td>
+ 		<td><input type="text" disabled="disabled" value="<?php echo $data['user_phone']?>"/></td>
+ 	</tr>
+ 	<tr>
+		<td>EMAIL</td>
+		 <td> <input type="text" disabled="disabled" value="<?php echo $data['user_email']?>"/></td>
+ 	 </tr>
+  	 <tr>
+		<td>LEVEL</td>
+        <td>
+          <select name="level">
+          <option value="1" <?php if($data['user_level']==1) echo "selected='selected'";?>>Admin</option>
+          <option value="2" <?php if($data['user_level']==2) echo "selected='selected'";?>>Member</option>
+          </select> 	
+		</td>
+ 	</tr>
+ </table>
+<input style="height:25px;width:70px;margin-top:10px;" type="submit" name="submit" value="UPDATE" />
+</form>
+
+</div>
+</fieldset>
+<div class="pt" align="center">Trang <a style="color:#F00">1</a></div>
+</body>
+</html>

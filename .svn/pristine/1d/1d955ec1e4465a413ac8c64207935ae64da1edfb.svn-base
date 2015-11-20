@@ -1,0 +1,96 @@
+<?php
+require '../database/customers.php';
+$intro=new customers();
+if(!isset($_GET['id'])||(empty($_GET['id']))){
+    header("location:".baseurl."admin/index.php?page=customers&act=list");
+    exit();
+}
+$id=$_GET['id'];
+$data=$intro->showOne($id);
+if(empty($data)){
+    header("location:".baseurl."admin/index.php?page=customers&act=list");
+    exit();
+}
+?>
+<style>
+    #noidung{
+        width: 750px;
+        height: 760px;
+        float: left;
+       
+    }
+    #head{
+         font-size: 20px;
+        height: 47px;
+        padding-top: 12px;
+        border-bottom: 1px solid #D8D8D8;
+        text-align: center;
+    }
+    #chitiet{
+       
+        width: 700px;
+        height: 640px;
+        padding-left: 50px;
+        padding-top: 50px;
+    }
+    #chitiet table{
+        border-collapse: collapse;
+        margin-bottom: 40px;
+    }
+    tr td{
+        font-size: 20px;
+        text-align: center;
+        width: 570px;
+        height: 40px;
+        border: 1px solid #ccc;
+    }
+    tr td.binhthuong{
+        height: 50px;
+    }
+    table tr td.thuoctinh{
+        font-size: 20px;
+        width: 100px;
+        border: 1px solid #ccc;
+    }
+    div#infor{
+        height: 300px;
+        overflow: scroll;
+        text-align: left;
+        
+    }
+   
+  
+    #menunhanh{
+       
+        width: 249px;
+        height: 760px;
+        float: left;
+        border-left: 1px solid #D8D8D8;
+    }
+</style>
+<div id="noidung">
+    <div id="head"><h1>Chi tiết</h1></div>
+    <div id="chitiet">
+     <table>
+    <tr>
+        <td class="thuoctinh">Mã </td>
+        <td><?php echo $data['cus_id'];?></td>
+    </tr>
+    <tr>
+        <td class="thuoctinh">Nội dung </td>
+        <td><div id="infor"><?php echo $data['cus_content'];?></div></td>
+    </tr>    
+     </table>
+        <span >
+            <a href="<?php echo baseurl."admin/index.php";?>"><img src="images/home.png" width="50px" height="50px" title="Trang chủ"></a>
+            <a href="#" ><img src="images/trash.png" width="50px" height="50px" title="Xóa"/></a>
+            <a href="<?php echo baseurl."admin/index.php?page=customers&act=list";?>"><img src="images/list.png" width="50px" height="50px" title="Danh sách"/></a>
+            <a href="<?php echo baseurl."admin/index.php?page=customers&act=edit&id=".$id;?>"><img src="images/pencil.png" width="50px" height="50px" title="Chỉnh sửa"></a>
+        </span>
+       
+    </div>
+  
+</div>
+<div id="menunhanh"></div>
+
+

@@ -1,0 +1,12 @@
+<?php
+	if(isset($_GET['page'])){
+		switch($_GET['act']){
+			case "list": require("modules/comments/list.php");break;
+			case "listcmt":require("modules/comments/listcmt.php");break;
+			case "listfull":require("modules/comments/listfull.php");break;
+			case "listfullcmt":require("modules/comments/listfullcmt.php");break;
+			case "searchp":require("modules/comments/searchp.php");break;
+			case "searchcmt":require("modules/comments/searchcmt.php");break;
+		}	
+	
+	}else require("../index.php");

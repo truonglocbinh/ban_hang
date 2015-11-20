@@ -1,0 +1,9 @@
+<?php
+		require("../../../functions/config.php");
+		require("../../../functions/database.php");
+		require("../../../functions/orders.php");
+		$order=new orders();
+		$id=$_POST['cid'];
+		$order->delete($id);	
+	
+?>

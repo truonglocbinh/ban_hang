@@ -1,0 +1,81 @@
+<?php 
+class orders extends database{
+	protected $_table = "tbl_orders";
+	public function showNewoderName($start,$limit){// lay tat ca nhung username co don hang moi
+      $sql="select distinct $this->_table.order_date,$this->_table.order_notice,tbl_users.user_name,tbl_users.user_id
+	  from $this->_table inner join tbl_products 
+	 	 on $this->_table.pro_id=tbl_products.pro_id 
+	  inner join tbl_users
+	  	 on $this->_table.user_id=tbl_users.user_id 
+	  where $this->_table.order_status=0 limit $start,$limit";
+       $this->query($sql);
+       return $this->fetchAll();
+   }
+    public function showNewoderRow(){// lay so record user co don hang moi
+      $sql="select distinct $this->_table.order_date,$this->_table.order_notice,tbl_users.user_name,tbl_users.user_id	
+	  from $this->_table inner join tbl_products 
+	 	 on $this->_table.pro_id=tbl_products.pro_id 
+	  inner join tbl_users
+	  	 on $this->_table.user_id=tbl_users.user_id
+	  where $this->_table.order_status=0 ";
+       $this->query($sql);
+       return $this->numRows();
+   }
+   
+     public function showNeworder($id,$p,$start,$limit){// lấy ra các order moi
+	   $sql="select * from $this->_table inner join tbl_products on $this->_table.pro_id=tbl_products.pro_id inner join tbl_users on tbl_users.user_id=$this->_table.user_id where tbl_users.user_id=$id and $this->_table.order_status=0 and $this->_table.order_notice=$p limit $start,$limit";
+       $this->query($sql);
+       return $this->fetchAll();
+   }
+   public function showNeworderRow($id,$p){// lấy ra số record của order mới
+	    $sql="select * from $this->_table inner join tbl_products on $this->_table.pro_id=tbl_products.pro_id inner join tbl_users on tbl_users.user_id=$this->_table.user_id where tbl_users.user_id=$id and $this->_table.order_status=0 and $this->_table.order_notice=$p";
+       $this->query($sql);
+       return $this->numRows();
+   }
+   
+   
+   public function showOldoderName($start,$limit){// lay tat ca nhung username co don hang moi
+      $sql="select distinct tbl_users.user_name,
+	  tbl_users.user_id
+	  from $this->_table inner join tbl_products 
+	 	 on $this->_table.pro_id=tbl_products.pro_id 
+	  inner join tbl_users
+	  	 on $this->_table.user_id=tbl_users.user_id limit $start,$limit";
+       $this->query($sql);
+       return $this->fetchAll();
+   }
+      public function showOldoderRow(){// lay so record user co don hang moi
+      $sql="select distinct tbl_users.user_name,
+	  tbl_users.user_id
+	  from $this->_table inner join tbl_products 
+	 	 on $this->_table.pro_id=tbl_products.pro_id 
+	  inner join tbl_users
+	  	 on $this->_table.user_id=tbl_users.user_id";
+       $this->query($sql);
+       return $this->numRows();
+   }
+    public function showOldorder($id,$start,$limit){// lấy ra các order moi
+	   $sql="select * from $this->_table inner join tbl_products on $this->_table.pro_id=tbl_products.pro_id inner join tbl_users on tbl_users.user_id=$this->_table.user_id where tbl_users.user_id=$id order by $this->_table.order_date desc limit $start,$limit";
+       $this->query($sql);
+       return $this->fetchAll();
+   }
+    public function showOldorderRow($id){// lấy ra số record của order mới
+	    $sql="select * from $this->_table inner join tbl_products on $this->_table.pro_id=tbl_products.pro_id inner join tbl_users on tbl_users.user_id=$this->_table.user_id where tbl_users.user_id=$id";
+       $this->query($sql);
+       return $this->numRows();
+   }
+   public function updateHot($id){// duyet cac comment moi thanh comment cu
+		 $sql="UPDATE $this->_table SET order_status='1' Where user_id=$id";
+	   $this->query($sql);   
+   }
+	public function update(){
+		
+	}
+	public function insert(){
+		
+	}
+	 public function delete($id){//xoa 1 order
+    $sql= "DELETE FROM $this->_table WHERE order_id=$id";							  
+	 $this->query($sql);
+   }
+}

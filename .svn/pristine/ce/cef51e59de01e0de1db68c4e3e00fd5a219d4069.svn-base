@@ -1,0 +1,11 @@
+<?php
+if (isset($_GET['sub'])){
+	switch($_GET['sub']){
+		case "led": require("layouts/document/led.php"); break;
+		case "pin": require("layouts/document/pin.php"); break;
+		case "trick": require("layouts/document/trick.php"); break;
+	}
+
+} else {
+	// hien ca 3
+}

@@ -1,0 +1,94 @@
+<?php
+require_once("functions/categories.php"); 
+$pid = $_GET['pid'];
+$product = new categories();
+$result = $product->getPro($pid);
+$related = $product->related($result['cate_id'],$pid,4);
+$test=$product->getSale($pid);
+debug($test);
+?>
+<div id="homelink" > <a style="color:#06F;" href="<?php echo baseurl; ?>">TRANG CHỦ</a> &raquo; <a style="color:#06F;" href="<?php echo baseurl."/?page=product&act=list&pages=3&cateid=1&start=0"; ?>"><?php echo $result['cate_name']; ?></a> &raquo; <a style="color:#06F;" href="#"><?php echo $result['pro_name']; ?></a> </div>
+<hr />
+
+<div id="homecontent" style="text-align:left">
+	<div class="product" > 
+    <h1 class="name"><?php echo $result['pro_name']; ?> </h1>
+    <hr />
+    	<div class="proimg"> 
+    		<img src="<?php echo baseurl."images/products/".$result['pro_image']; ?>" width="200" />
+        </div> 
+        <div class="proinfo" > 
+        <hr />
+            <p>Tên sản phẩm : <?php echo $result['pro_name']; ?> </p>
+            <p><?php echo $result['pro_info']; ?></p>
+            
+            <p class="red"><?php if($result['pro_number']>0)
+			{ echo  " Trạng thái: Còn hàng";
+			}
+			else echo"Trạng thái :Hết Hàng";
+			?>
+            <hr />
+             <h2 class="price">Giá : <?php echo $result['pro_price']; ?> vnđ</h2>
+             <p class="khuyenmai">
+           <?php if($result['pro_id']==1)
+		   echo "Sản phảm được khuyến mại";
+		   else "Không được khuyến mại";
+			 ?> 
+           </p> 
+           </p>
+             <hr />
+                    <?php echo "Số lượng"; ?>  <input value="1" type="text" size="10px;" />
+             
+        <p style="margin-top:11px;"><a href="" ><img src="images/products/muahang.gif" style="width:80px" height="30px" /></a></p>
+        </div> 
+        </div> 
+  <div class="info">
+       <div class="title"  > 
+        <ul>
+        <li> <a href="<?php echo baseurl."?page=product&act=detail&pid=".$pid."&work=mota"?>" >Mô tả</a></li>
+        <li> <a  href="<?php echo baseurl."?page=product&act=detail&pid=".$pid."&work=comment"?>" >Đánh giá</a> </li>
+        </ul> 
+      </div>
+     
+       <div class="detail" > 
+ <?php
+      if(isset($_GET['work']))
+        {  switch($_GET['work'])
+        { 
+      case "comment":   require("layouts/products/comment.php"); break;
+      default: require("layouts/products/mota.php"); break;
+
+	    }
+        }else 
+       require("layouts/products/mota.php"); 
+	  
+ ?>
+ <?php ?>
+ </div> 
+  </div>
+    <div class="related">
+    	<h3 style=" line-height:-30px;background-color:#999;height:40px;width:300px; margin-bottom:40px; margin-top:20px;text-transform:uppercase">Sản phẩm cùng chuyên mục</h3>
+      <div class="procontent" >
+		  <?php 
+          if($related != NULL){
+			  ?>
+             
+          <?php foreach($related as $items){  ?>
+          <div class="productrelate" > <a href="<?php echo baseurl."?page=product&act=detail&pid=".$items['pro_id']; ?>"><img src="<?php echo baseurl."images/products/".$items['pro_image']; ?>" width="150" height="150" alt=""></a>
+            <h3><a href="<?php echo baseurl."?page=product&act=detail&pid=".$items['pro_id']; ?>"><?php echo $items['pro_name']; ?></a></h3>
+            <p>Giá : <span class="red"><?php echo $items['pro_price']; ?> vnd</span></p>
+ <div id="muahang" ><a href="<?php echo baseurl."functions/shopCart/addToCart.php?pid=".$items['pro_id']; ?>"></a><a href="<?php echo baseurl."functions/shopCart/addToCart.php?pid=".$items['pro_id']; ?>"></a><a href="<?php echo baseurl."functions/shopCart/addToCart.php?pid=".$items['pro_id']; ?>"></a><a href="<?php echo baseurl."functions/shopCart/addToCart.php?pid=".$items['pro_id']; ?>"><img src="images/products/muahang.gif" style="width:80px" height="30px" /></a></div>
+ </div> 
+
+
+      <?php    } ?>
+        <?php     }else ?>
+    
+
+        </div>
+    </div>
+    
+    
+</div>
+</div>
+</div> 

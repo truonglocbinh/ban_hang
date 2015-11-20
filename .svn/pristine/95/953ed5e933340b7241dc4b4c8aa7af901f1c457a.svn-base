@@ -1,0 +1,9 @@
+  <div id="footer">
+    <div id="footerl">
+      <div id="footerl"> <img src="images/home/footer.jpg" width="150" alt=""> </div>
+    </div>
+    <div id="footerr">
+      <h2>Đồ án thiết kế website với PHP và MYSQL</h2>
+      <h4>Thuộc về nhóm BKSUN - chủ đề bán linh kiện điện tử</h4>
+    </div>
+  </div>

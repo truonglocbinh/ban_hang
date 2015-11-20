@@ -1,0 +1,180 @@
+<?php require("../functions/orders.php");?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+<style type="text/css">
+#table{
+	border:1px solid #999;
+	//padding-top:20px 0px 0px 0px;
+	//height:400px;
+	width:833px;
+	margin:20px 0px 0px 130px;
+	box-shadow:5px 2px 5px #999999;
+	border-radius:5px;
+}
+
+table{
+	border-collapse:collapse;
+}
+.title{
+	margin-top:50px;
+}
+.tile{
+	background-color:#999;
+}
+#list{
+	width:45px;
+}
+a{
+	text-decoration:none;
+}
+.pt a{
+	border:1px solid #666666;
+	padding-top:1px; 
+	padding-left:4px;
+	padding-right:4px;
+	margin-left:2px;
+	border-radius:3px;
+}
+#current{
+	color:#F00;
+}
+.search{
+	background-color:#0F3;
+	height:70px;
+	padding-top:10px;
+	padding-left:10px;
+}
+.search input{
+	height:30px;
+	width:120px;
+	margin-left:7px;
+	border-radius:5px;
+}
+table input {
+	height:60px;
+	width:155px;
+	background-color:#FFF;
+}
+.pt{	
+	margin-left:150px;
+	margin-right:130px;
+	margin-top:70px;
+    box-shadow:5px 2px 5px #999999;
+}
+.pt a{  
+	border:1px solid #666666;
+	padding-top:1px; 
+	padding-left:4px;
+	padding-right:4px;
+	margin-left:2px;
+	border-radius:3px;
+}
+td:hover{
+	background-color:#CCC;
+}
+.duyet input{
+	height:30px;
+	width:70px;
+	margin-top:10px;
+}
+</style>
+<body>
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $(".del").click(function(){
+		$d=$(this).attr("name");
+		$(this).parent().parent().fadeOut("slow");
+		$.ajax({
+			"url": "modules/orders/del.php",
+			"type": "POST",
+			"data":"cid="+$d,
+			async:false,
+			success:function(result){	
+			}
+		});
+	});
+});
+</script>
+<?php 
+$sstart=0;
+$limit=2;
+if(isset($_GET['act'])){
+	$id=$_GET['pid'];
+	if(isset($_GET['sstart'])){
+		$sstart=$_GET['sstart'];
+	}
+	$order=new orders();
+	$data=array();
+	$data=$order->showOldorder($id,$sstart,$limit);
+	$totalpage=ceil($order->showOldorderRow($id)/$limit);	
+}
+	if(isset($_POST['duyet'])){
+  	    $order->updateHot($id);
+		header("location:index.php?page=orders&act=listfull");
+	}
+
+?>
+<div align="center" class="title"><h3>Danh sách orders</h3><br />
+<?php echo "Người mua : ".$data['0']['user_name'];?>
+</div>
+<div id="table" align="center">
+<table  class="table" width="649" border="1">
+  <tr>
+    <td width="39">stt</td>
+    <td width="119">products</td>
+    <td width="50">number</td>
+    <td width="150">date</td>
+    <td width="210">notice</td>
+    <td width="41">del</td>
+  </tr>
+ <?php 
+ if($data==NULL){
+	echo "<tr><td align='center' colspan='6'>Không có orders mới</td></tr>";
+  }else{
+	 $stt=1;
+ 	 $pro_name="";
+ 	 foreach($data as $item){
+ ?>
+  <tr>
+    <td><?php echo $stt;?></td>
+    <td><?php echo $item['pro_name'];?></td>
+    <td><?php echo $item['order_number']?></td>
+    <td><?php echo $item['order_date'] ?></td>
+    <td><?php echo $item['order_notice']?></td>
+    <td ><a class="del" name="<?php echo $item['order_id'];?>" href="javascript:void(0)">del</a></td>
+  </tr>
+  <?php $stt++;
+   }}?>
+</table>
+</div>
+
+<div class="pt"><?php //phan trang
+if($totalpage >1){
+	$current=($sstart/$limit +1);
+	if($current>1){
+		$newsstart=($current-2)*$limit;
+		echo "<a href='http://localhost/bksun/admin?page=orders&act=listfullorder&pid=$id&sstart=$newsstart'>prev</a>";
+	}
+	for($i=0;$i<$totalpage;$i++){
+		$sstart=0;
+		$sstart=$i*$limit;
+		if($current!=($i+1)){
+			echo "<a  href='http://localhost/bksun/admin?page=orders&act=listfullorder&pid=$id&sstart=$sstart'>".($i+1)."</a>";
+		}else{
+			echo "<a id='current'>".($i+1)."</a>";	
+		}
+	}
+	
+	if($current < $totalpage){
+	$newsstart=$current*$limit;
+	$newcurrent=$current+1;
+	echo "<a href='http://localhost/bksun/admin?page=orders&act=listfullorder&pid=$id&sstart=$newsstart'>next</a>";
+	}
+}
+?></div>
+</body>
+</html>

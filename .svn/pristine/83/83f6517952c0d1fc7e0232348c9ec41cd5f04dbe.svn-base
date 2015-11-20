@@ -1,0 +1,13 @@
+<div id="homelink">
+	<a href="<?php echo baseurl; ?>">Trang chủ</a> &raquo; <a href="<?php echo baseurl;?>">Tài liệu kỹ thuật</a> &raquo; <a href="#">Tài liệu LED</a>
+</div>
+<div id="homecontent">
+<?php require("functions/document/led.php");
+	$led = new led();
+	$result = $led->getdata();
+	foreach ($result as $content) {
+			echo $content['doc_content'];
+			echo "<br>";
+	}
+?>
+</div>

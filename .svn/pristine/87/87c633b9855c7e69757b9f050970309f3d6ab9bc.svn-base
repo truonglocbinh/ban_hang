@@ -1,0 +1,321 @@
+<?php 
+require '../database/documents.php';
+$doc=new documents();
+$id="";
+$title="";
+$type="";
+$vip="";
+$searchtype="";
+$vitri=0;
+$curent=1;
+$data=array();
+$tongsobanghi=0;
+$tongsotrang=0;
+if(!isset($_GET['trang'])){
+    $curent=1;
+    $vitri=0;
+}else{
+    $curent=$_GET['trang'];
+    $vitri=($curent-1)*10;
+}
+
+if(isset($_GET['timkiem'])){
+    $id=  trim($_GET['id']);
+    $title=trim($_GET['title']);
+    $type=$_GET['type'];
+    $vip=$_GET['vip'];
+    $searchtype=$_GET['searchtype'];
+    $data1=$doc->search($id, $title, $type, $vip, $searchtype,$vitri);
+    if($data1){
+        $tongsobanghi=$data1[0];
+        $data=$data1[1];
+    }
+}
+?>
+<style>
+    #search{
+        width: 980px;
+        height: 50px; 
+        padding-left: 20px;
+    }
+    #search table td{
+        padding: 5px;
+        padding-left: 15px;
+    }
+    #search table td input{
+        width: 100px;      
+        border:solid 1px #ccc; 
+        height: 30px;
+        -moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2); 
+        -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2); 
+        box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+        -webkit-border-radius: 3px; 
+        -moz-border-radius: 3px; 
+        border-radius: 8px;
+    }
+       #search select{
+         padding:3px;
+     height: 30px;
+    margin: 0;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    background: #f8f8f8;
+    color:#000;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+    overflow: hidden;
+    }
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+    select {padding-right:18px}
+}
+    #search input:focus {
+    outline: none;
+    border:1px solid #3fb8e8 ;
+    box-shadow: 0 0 10px #3fb8e8;
+}   
+#search input[type='submit']{
+        font-size: 17px;
+        color: whitesmoke;
+        border-radius: 15px;
+        width: 100px;
+        background-color: #1392e9;
+        border: 0;
+        -moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2); 
+        -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2); 
+        box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+    }
+     #search input[type='submit']:hover{
+        cursor: pointer;
+        outline: none !important;
+        border:1px solid #3fb8e8 ;
+        box-shadow: 0 0 10px #3fb8e8;
+    }
+    #result{
+        width: 1000px;
+        height: 632px;
+        padding-top: 28px;
+        background-color: #0099FF;
+    }
+    #result table{      
+        padding: 5px;
+        border-collapse: collapse;
+    }
+      #result table td{
+         border: 1px solid #CCCCCC;
+         text-align: center;        
+    }
+   
+     #result  table tbody td{
+        font-size: 20px;
+        width: 890px;
+        height: 55px;
+        background-color: rgb(238, 238, 238);
+    }
+    #result .title td{
+        font-size: 20px;
+        font-weight: normal;
+        color: #ffffff;
+        width: 890px;
+        height: 50px;
+        background-color:  rgb(112, 196, 105);
+    }
+    #pages{
+        width: 1000px;
+        height: 50px;
+    }
+    #pages ul li{
+        height: 50px;
+        line-height: 50px;
+        padding: 0 10px;
+         margin: 0px;
+        list-style-type: none;
+        float: left;
+       border-right:1px solid #CCC;
+    }
+    #pages ul li a{
+        font-size: 20px;
+        text-decoration: none;
+    }
+</style>
+ <script type="text/javascript">
+        $(document).ready(function(){
+            $("a.del").click(function(){
+               if(confirm("Bạn có muốn xóa không ?")){
+                  $id=$(this).attr("name"); 
+                  $(this).parent().parent().fadeOut("slow");                 
+                  $.ajax({
+                      "url": "modules/documents/deleteajax.php",                     "type":"post",
+                      "data":"uid="+$id,
+                      "async":"false",
+                      success: function (data) {                     
+                    }
+                  });
+               } 
+               return false;
+              
+            });
+        });
+        </script>
+        <script language='javascript'>
+    function isNumberKey(evt)
+    {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+       </script>
+       <script>
+   $(document).ready(function(){
+      $("a#remove").click(function(){
+        var myCheckboxes = new Array();
+        $("input[class='case']:checked").each(function() {
+           $(this).parent().parent().fadeOut("slow");
+           myCheckboxes.push($(this).val());
+        });
+        $.ajax({
+            type: "POST",
+            url: "modules/documents/del.php",
+            data: 'myCheckboxes='+myCheckboxes,
+            success: function(data){
+              if(data==0) alert("Không thể xóa được !");
+            }
+        });
+        return false;
+      }) ;
+   });
+</script>
+      <script>
+      $(document).ready(function() {
+   //select and deselect
+ $("#selectall").click(function () {
+        $('input:checkbox').prop('checked', this.checked);
+    });
+
+//If one item deselect then button CheckAll is UnCheck
+    $(".case").click(function () {
+        if (!$(this).is(':checked'))
+            $("#selectall").prop('checked', false);
+    });
+    
+});
+        </script>
+        <script>
+       $(document).ready(function(){
+    $('a#back').click(function(){
+        parent.history.back();
+        return false;
+    });
+});
+        </script>
+<div id="search">
+    <form action="" method="get">
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>
+                <input type="hidden" name="page" value="documents" />
+                <input type="hidden" name="act" value="search" />
+                <input type="text" name="id"/>
+            </td>
+            <td>Tiêu đề:</td>
+            <td><input type="text" name="title"></td>
+            <td>
+                <select name="type">
+                    <option value="0">ALL</option>
+                    <option value="IC">IC</option>
+                    <option value="Pin">Pin</option>
+                    <option value="Thủ thuật">Thủ thuật</option>                   
+                </select>
+            </td>
+            <td>
+                <select name="vip">
+                    <option value="0">Thường</option>
+                    <option value="1">Vip</option>
+                </select>
+            </td>
+            <td>Kiểu tìm kiếm</td>
+            <td>
+                <select name="searchtype">
+                    <option value="0">Tương đối</option>
+                    <option value="1">Chính xác</option>
+                </select>
+            </td>
+            <td><input type="submit" name="timkiem" value="Tìm kiếm"/></td>
+        </tr>
+    </table>
+    </form>
+</div>
+<div id="result">
+    <?php  if(!empty($data)){ ?>
+     <table>
+    <tr class="title">
+        <td><input type="checkbox" id="selectall"/></td>
+        <td>Id</td>
+        <td>Tiêu đề</td>
+        <td>Loại tài liệu</td>
+        <td>Vip</td>
+        <td>Thao tác</td>
+    </tr>
+    <tbody>
+    <?php 
+   
+    foreach ($data as $value) {?>
+    <tr>
+        <td><input type="checkbox" name="myCheckboxes[]" class="case" value="<?php echo $value['doc_id']; ?>" /></td>
+        <td><?php echo $value['doc_id'] ?></td>
+        <td><?php echo $value['doc_title'] ?></td>
+        <td><?php echo $value ['doc_type'];?></td>
+        <td><?php if($value['doc_vip']==1) echo 'Có';else echo 'Không'; ?></td>
+        <td> 
+            <a href="<?php echo baseurl."admin/index.php?page=documents&act=detail&id=".$value['doc_id'];?>">
+                <img src="images/eye.png" width="20" height="20" title="Chi tiet"></a>
+            <a href="javascript:void(0)" class="del" name="<?php echo $value['doc_id'];?>">
+                <img src="images/trash.png" width="20" height="20"title="Xoa"></a>
+            <a href='<?php echo baseurl."admin/index.php?page=documents&act=edit&id=".$value['doc_id'];?>'>
+                <img src="images/pen.png"width="25" height="25" title="Cap nhat"></a>
+        </td>
+    </tr>
+   
+    <?php   }?>
+     </tbody>
+</table>
+    <?php }else echo "Không tìm thấy"; ?>
+</div>
+<div id="pages">
+     <?php   
+    if(!empty($data)){
+    $tongsotrang=  ceil($tongsobanghi/10);
+    echo "<ul>";
+    if(($curent!=1)&&($curent >1)){
+       $i=$curent-1;
+       echo "<li><a href='index.php?page=documents&act=search&id=$id&title=$title&type=$type&vip=$vip&trang=$i&searchtype=$searchtype&timkiem=Tim+kiem' style=''>"."Previous"."</a></li>";
+    }?>
+    <?php 
+        $less=$curent-1;
+        $more=$curent+1;
+        if($less <= 1)$less=1;
+        if($more> $tongsotrang){ $more=$tongsotrang;
+        
+        }
+        for($i=$less;$i<=$more;$i++){
+    ?> 
+    <li><a href="index.php?page=documents&act=search&id=<?php echo $id;?>&title=<?php echo $title; ?>&type=<?php echo $type;?>&vip=<?php echo $vip; ?>&trang=<?php echo $i;?>&searchtype=<?php echo $searchtype; ?>&timkiem=Tim+kiem"
+            <?php if($curent == $i) echo "style='font-weight:bold;color:red;'" ?>
+            ><?php echo $i;?></a></li>
+        <?php } ?>
+   <?php  if(($curent !=$tongsotrang)){
+       $i=$curent + 1;
+       echo "<li><a href='index.php?page=documents&act=search&id=$id&title=$title&type=$type&vip=$vip&trang=$i&searchtype=$searchtype&timkiem=Tim+kiem' style=''>"."Next"."</a></li>";
+    }
+    echo "</ul>";}?>
+</div>

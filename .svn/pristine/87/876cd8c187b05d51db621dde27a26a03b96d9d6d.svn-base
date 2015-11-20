@@ -1,0 +1,10 @@
+<?php
+$db = mysql_connect("localhost","root","") or die("Can not connect database");
+mysql_select_db("bksun",$db) or die("Database is not exits");
+mysql_query("SET NAMES utf8");
+
+function debug($val){
+	echo "<pre>";
+	print_r($val);
+	echo "</pre>";
+}

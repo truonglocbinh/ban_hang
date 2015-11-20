@@ -1,0 +1,119 @@
+<?php
+class documents extends database{
+    protected $_table = "tbl_documents";
+    public function insert($doc_title,$doc_content,$doc_type,$doc_vip){// them 1 record vao bang user
+       $sql="INSERT INTO $this->_table"
+               . "(doc_title,doc_content,doc_type,doc_vip)"
+               . "VALUES('$doc_title','$doc_content','$doc_type','$doc_vip')";
+       return mysql_query($sql);
+   }
+   public function update($id,$doc_title,$doc_content,$doc_type,$doc_vip){//update thong tin 1 record
+         $sql="UPDATE $this->_table SET doc_title='$doc_title',"
+               . "doc_content='$doc_content',"
+                 . "doc_type='$doc_type',"
+                 . "doc_vip='$doc_vip'"
+                 . " WHERE doc_id="
+               . "$id" ;
+       return mysql_query($sql);    
+   }
+   public function delete($id){//xoa 1 user
+       $sql="DELETE FROM $this->_table WHERE doc_id='$id'";
+       return mysql_query($sql);       
+   }
+   public function getRecordNumber(){// ham tra ve so luong cac record trong news table
+       $sql="select * from $this->_table ";
+       $this->query($sql);
+       return $this->numRows();
+   }
+   public function showAll(){// lay tat ca cac record cua user
+       $sql="select * from $this->_table ";
+       $this->query($sql);
+       return $this->fetchAll();
+   }
+   public function showOne($id){// Lay 1 ban ghi 
+       $sql="SELECT * FROM $this->_table WHERE doc_id=$id";
+       $this->query($sql);
+       return $this->fetch();
+   }
+    public function page($vitri){
+       $sql="SELECT * FROM $this->_table LIMIT $vitri,10";
+       $this->query($sql);
+       return $this->fetchAll();
+   }
+public function search($id,$title,$type,$vip,$searchtype,$vitri){
+    $data=array(",doc_id=,"=>"'$id'",",doc_title LIKE,"=>"'$title'",
+        ",doc_type = ,"=>"'$type'",",doc_vip = ,"=>"'$vip'"
+    );
+$sql="SELECT,*,FROM,$this->_table,WHERE,";
+$t="";
+$keysql="AND";
+if($searchtype == 0) {
+    $keysql="OR";
+}
+foreach ($data as $key => $value) {
+    if(($value !="''")&&($value !="'0'")){
+        $t=$key;
+        $sql=$sql.$key.$value.",".$keysql;
+         break;
+    }   
+}
+foreach ($data as $key => $value) {
+    if(($value !="''")&&($value !="'0'")){
+        if($key == $t){
+        continue;}
+        else{
+            $sql=$sql=$sql.$key.$value.",".$keysql;
+        }
+    }
+}
+$string=trim($sql);
+$data1=explode(",",$string);
+$j=  count($data1);
+   if($data1[$j-1]==$keysql){
+       unset($data1[$j-1]);
+   }
+$string= implode(" ",$data1);
+$this->query($string);
+$data=$this->fetchAll();
+if(!empty($data)){
+   $i=count($data); 
+   $array=array();
+   $array[]=$i;
+$sql=$string." LIMIT $vitri,10";
+   $this->query($sql);
+   $data=  $this->fetchAll();
+   $array[]=$data;
+   return $array;
+}else{
+    return 0;
+}
+}
+    function getData($array,$vitri){
+    $j=count($array)-1;
+    $data=array();
+    for($i=$vitri;$i<($vitri+2);$i++){
+        $data[]=$array[$i];
+        if($i==$j)break;       
+    }
+    return $data;
+    
+}
+public function  getTotal(){
+    $sql="SELECT * FROM $this->_table";
+    $this->query($sql);
+    $data=  $this->fetchAll();
+    if(empty($data)){
+        return 0;
+    }else{
+       $total=0;
+       foreach ($data as $value){
+           $total=$total +1;
+       }
+       return $total;
+    }        
+}
+public function deleteAll(){
+     $sql="DELETE FROM $this->_table";
+     return mysql_query($sql);
+}
+}

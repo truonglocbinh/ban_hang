@@ -1,0 +1,107 @@
+/* CSS Document */
+#search{	
+	background-color:#0F6;
+	height:70px;
+	padding-top:10px;
+	padding-left:10px;
+}
+#table{
+	padding:50px 50px 50px 150px;
+	width: 700px;
+	height: 200px;
+	border-radius:10px;
+}
+
+table{
+  border: 1px solid #dddddd;
+  border-collapse: collapse;
+  border-radius: 4px;
+  box-shadow:10px 10px 10px #999999;
+
+}
+#title{
+	margin-top:50px;
+}
+.tile{
+	background-color:#999
+}
+
+#tile{
+	height:15px;
+	margin-top:20px;
+}
+.title{
+	background-color:#CCC 
+}
+a{
+	text-decoration:none
+}
+.pt{	
+	margin-left:150px;
+	margin-right:130px;
+	margin-top:250px;
+    box-shadow:5px 2px 5px #999999;
+}
+
+#current{
+	color:#F33
+}
+.pt a{  
+	border:1px solid #666666;
+	padding-top:1px; 
+	padding-left:4px;
+	padding-right:4px;
+	margin-left:2px;
+	border-radius:3px;
+}
+td:hover{
+	background-color:#CCC;
+}
+.table input{
+	height:31px;
+}
+#search input,select{
+	width:120px;
+	height:30px;
+	border-radius:3px;
+	border-radius:5px;
+}
+td input{
+	border:0;
+	background-color:#FAFAFA;
+	color:#000
+}
+.pt{
+	width:300px;
+	margin-left:350px;
+	margin-right:130px;
+	margin-top:70px;
+    box-shadow:5px 2px 5px #999999;
+}
+.pt a{  
+	border:1px solid #666666;
+	padding-top:1px; 
+	padding-left:4px;
+	padding-right:4px;
+	margin-left:2px;
+	border-radius:3px;
+}
+table input:hover{
+	background-color:#CCC;
+}
+.button {
+	outline:none;
+   border-top: 1px solid #247db5;
+   background: #28597a;
+   background: -webkit-gradient(linear, left top, left bottom, from(#cadbd2), to(#28597a));
+   background: -webkit-linear-gradient(top, #cadbd2, #28597a);
+   background: -moz-linear-gradient(top, #cadbd2, #28597a);
+   background: -ms-linear-gradient(top, #cadbd2, #28597a);
+   background: -o-linear-gradient(top, #cadbd2, #28597a);
+   
+   }
+.button:hover {
+   border-top-color: #42aac9;
+   background: #42aac9;
+   color: #050308;
+   }

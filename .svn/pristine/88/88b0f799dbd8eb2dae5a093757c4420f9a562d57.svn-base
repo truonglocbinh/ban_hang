@@ -1,0 +1,54 @@
+<?php
+class sales extends database{
+    protected $_table="tbl_sales";
+    function showAll(){
+        $sql="SELECT * FROM $this->_table";
+        $this->query($sql);
+        return $this->fetchall();
+    }
+    function insert($pro_id,$sale_number,$sale_percent,$sale_price,$sale_start,$sale_end,$sale_notice){
+        $sql="INSERT INTO $this->_table"
+                . "(pro_id,sale_number,sale_percent,sale_price,sale_start,sale_end,sale_notice)"
+                . "VALUES('$pro_id',"
+                . "'$sale_number',"
+                . "'$sale_percent',"
+                . "'$sale_price',"
+                . "'$sale_start',"
+                . "'$sale_end',"
+                . "'$sale_notice'"
+                . ")";
+        return mysql_query($sql);
+    }
+    function update($id,$pro_id,$sale_number,$sale_percent,$sale_price,$sale_start,$sale_end,$sale_notice){
+       $sql="UPDATE $this->_table SET "
+               . "pro_id='$pro_id',"
+               . "sale_number='$sale_number',"
+               . "sale_percent='$sale_percent',"
+               . "sale_price='$sale_price',"
+               . "sale_start='$sale_start',"
+               . "sale_end='$sale_end',"
+               . "sale_notice='$sale_notice' "
+               . "WHERE sale_id=$id"; 
+       return mysql_query($sql);
+    }
+    public function showOne($id){
+        $sql="SELECT * FROM $this->_table WHERE sale_id=$id";
+        $this->query($sql);
+        return $this->fetch();
+    }
+      public function getRecordNumber(){// ham tra ve so luong cac record trong news table
+       $sql="select * from $this->_table ";
+       $this->query($sql);
+       return $this->num_rows();
+   }
+    function delete($id){
+        $sql="DELETE FROM $this->_table WHERE sale_id=$id";
+        return   mysql_query($sql);
+    }
+      public function page($vitri){
+       $sql="SELECT * FROM $this->_table LIMIT $vitri,10";
+       $this->query($sql);
+       return $this->fetchall();
+   }
+    
+}

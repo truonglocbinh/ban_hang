@@ -1,0 +1,110 @@
+<?php
+require '../database/products.php';
+require '../database/sales.php';
+$pro=new products();
+if((!isset($_GET['id']))||(empty($_GET['id']))){
+    header("location:".baseurl."admin/index.php?page=sales&act=list");
+    exit();
+}
+$id=$_GET['id'];
+$sales=new sales();
+$data=$sales->showOne($id);
+if(empty($data)){
+     header("location:".baseurl."admin/index.php?page=sales&act=list");
+     exit();
+}
+?>
+<style>
+     #noidung{
+        width: 750px;
+        height: 760px;
+        float: left;
+    }
+    #head{
+        font-size: 20px;
+        height: 47px;
+        padding-top: 12px;
+        border-bottom: 1px solid #F2F2F2;
+        text-align: center;
+    }
+    #chitiet{       
+        width: 700px;
+        height: 640px;
+        padding-left: 50px;
+        padding-top: 50px;
+    }
+    #chitiet table{
+        border-collapse: collapse;
+    }
+    tr td{
+        text-align: center;
+        width: 520px;
+        height: 60px;
+        border: 1px solid #ccc;
+        font-size: 22px;
+    }
+   
+    table tr td.thuoctinh{
+        font-size: 20px;
+        width: 150px;
+        border: 1px solid #ccc;
+    }
+    #ghichu{
+        height: 70px;
+        overflow:  scroll;
+        text-align: left;
+        font-size: 16px;
+    }
+      #menunhanh{
+        width: 149px;
+        height: 760px;
+        float: left;
+        border-left: 1px solid #F2F2F2;
+    }
+</style>
+<div id="noidung">
+    <div id="head"><h1>Chi tiết sản phẩm</h1></div>
+    <div id="chitiet">
+        <table>
+    <tr>
+    <td class="thuoctinh">Mã khuyến mãi</td>
+    <td ><?php echo $data['sale_id'];?></td>
+    </tr>
+    <tr>
+        <td class="thuoctinh">Mã-Tên sản phẩm</td>
+        <td><?php echo $pro->getName($data['pro_id']);?></td>
+    </tr>
+    <tr>
+        <td class="thuoctinh">Số lượng</td>
+        <td><?php 
+           $prodata=$pro->showOne($data['pro_id']);
+           if($prodata != NULL){
+               echo $prodata['pro_number'];
+           }else echo "Không rõ";
+        ?></td>
+    </tr>
+    <tr>
+        <td class="thuoctinh">Tỷ lệ khuyến mãi</td>
+        <td><?php echo $data['sale_percent'];?>%</td>
+    </tr>
+    <tr>
+        <td class="thuoctinh">Gía khuyến mãi</td>
+        <td><?php echo $data['sale_price'];?> VNĐ</td>
+    </tr>
+    <tr>
+        <td class="thuoctinh">Ngày bắt đầu</td>
+        <td><?php echo $data['sale_start'];?></td>
+    </tr>
+    <tr>
+        <td class="thuoctinh">Ngày kết thúc</td>
+        <td><?php echo $data['sale_end'];?></td>
+    </tr>
+    <tr>
+        <td class="thuoctinh">Ghi chú</td>
+        <td><div id="ghichu"><?php if($data['sale_notice']== "")  echo 'Không có gì';
+        else {echo $data['sale_notice'];}?></div></td>
+    </tr>
+</table>
+    </div>
+</div>
+<div id="menunhanh"></div>

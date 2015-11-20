@@ -1,0 +1,62 @@
+<?php session_start(); ?>
+<?php require("functions/config.php"); ?>
+<?php require("functions/database.php"); ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Website thương mại đồ điện tử</title>
+<link href="styles/styleIndex.css" rel="stylesheet" type="text/css" />
+<link href="" rel=""/>
+<script type="text/javascript" src="<?php echo baseurl; ?>scripts/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("ul li.sub").hover(function(){
+		$(this).find("ul").slideDown();
+	},function(){
+		$("ul li.sub ul").hide();
+	});
+	$("#slideshow > div:gt(0)").hide();
+		setInterval(function() { 
+			$('#slideshow > div:first')
+				.fadeOut(1000)
+				.next()
+				.fadeIn(1000)
+				.end()
+				.appendTo('#slideshow');
+			},  3000);
+			/*$('.imgLike').each(function(i,el) {
+    				$(el).attr('img-index',i);
+    				$("<input>").attr({'id':'img-'+i, 'type':'radio', 'value':i, 'name':'slideselector'}).click(function() {select(i);}).appendTo($('#slideselector'))
+				});
+				function rotate(speed) { 
+				  $('#slideshow > div:first')
+					.fadeOut(speed)
+					.next()
+					.fadeIn(speed)
+					.end()
+					.appendTo('#slideshow');
+				  $('input[name="slideselector"]')[$('#slideshow > div:first div.imgLike').attr('img-index')].checked=true;
+				}
+				function select(idx) {
+					clearInterval(interval);
+					$('#slideshow > div:first').fadeOut(1000)
+					while ($('#slideshow > div:first .imgLike').attr('img-index') != idx) {
+					  rotate(0);
+					}
+					$('#slideshow > div:first').fadeIn(1000);    
+					interval = setInterval(function(){rotate(1000);}, 3000);
+				}
+				var interval = setInterval(function(){rotate(1000);}, 3000);*/
+});
+</script>
+</head>
+<body>
+<div id="wrapper">
+<?php require("layouts/header.php"); ?>
+ <?php require("layouts/content.php"); ?>
+ <?php require("layouts/footer.php"); ?>
+</div>
+</body>
+
+

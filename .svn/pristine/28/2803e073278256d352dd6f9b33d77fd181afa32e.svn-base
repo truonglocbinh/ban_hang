@@ -1,0 +1,152 @@
+<?php require("../functions/orders.php"); ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+<style type="text/css">
+.table{
+	border:1px solid #999;
+	padding-top:20px;
+	height:400px;
+	width:600px;
+	margin:20px 0px 0px 250px;
+	box-shadow:5px 2px 5px #999999;
+	border-radius:5px;
+}
+table{
+	border-collapse:collapse;
+
+}
+.title{
+	margin-top:50px;
+}
+.tile{
+	background-color:#999;
+}
+#list{
+	width:45px;
+}
+a{
+	text-decoration:none;
+}
+.pt a{
+	border:1px solid #666666;
+	padding-top:1px; 
+	padding-left:4px;
+	padding-right:4px;
+	margin-left:2px;
+	border-radius:3px;
+}
+#current{
+	color:#F00;
+}
+.search{
+	background-color:#0F3;
+	height:70px;
+	padding-top:10px;
+	padding-left:10px;
+}
+.search input{
+	height:30px;
+	width:120px;
+	margin-left:7px;
+	border-radius:5px;
+}
+table input {
+	height:27px;
+	width:150px;
+	background-color:#FFF;
+}
+.pt{	
+	margin-left:150px;
+	margin-right:130px;
+	margin-top:70px;
+    box-shadow:5px 2px 5px #999999;
+}
+.pt a{  
+	border:1px solid #666666;
+	padding-top:1px; 
+	padding-left:4px;
+	padding-right:4px;
+	margin-left:2px;
+	border-radius:3px;
+}
+td:hover{
+	background-color:#CCC;
+}
+</style>
+<body>
+<div class="search" align="center">
+<input type="text" name="tsearch" id="tsearch" /><input type="submit" style="width:70px;" name="ok" id="search" value="search" />
+</div>
+<div class="title" align="center"><h3> Danh sách khách hàng order mới</h3></div>
+<?php 
+$start=0;
+$limit=3;
+if(isset($_GET['act'])){
+	if(isset($_GET['start'])){
+		$start=$_GET['start'];
+	}
+	$oder=new orders();
+	$data=array();
+	$data=$oder->showNewoderName($start,$limit);
+	$totalpage=ceil($oder->showNewoderRow()/$limit);	
+}
+?>
+<div class="table" align="center">
+<table  width="432" border="1">
+  <tr>
+    <td width="25" height="30">stt</td>
+    <td width="146" align="center">Người mua</td>
+    <td width="63">Đơn hàng</td>
+    <td width="126">Ngày tháng</td>
+    <td width="38">detail</td>
+  </tr>
+ <?php 
+ if($data==NULL){
+	echo "<tr><td align='center' colspan='5'>Không có orders mới</td></tr>";
+  }else{
+ 	$stt=1;
+ 	foreach($data as $item){
+ ?>
+ 	 <tr>
+  	  	<td height="41"><?php echo $stt;?></td>
+   	 	<td><?php echo $item['user_name'];?></td>
+        <td><?php echo $item['order_notice'];?></td>
+        <td><?php echo $item['order_date'];?></td>
+   		<td><a href="<?php echo baseurl."admin/index.php?page=orders&act=listorder&pid=".$item['user_id']."&p=".$item['order_notice']; ?>">detail</a></td>
+ 	 </tr>
+  <?php $stt++;
+
+   }}?>
+</table>
+</div>
+<div class="pt" align="center"><?php 
+if($totalpage >1){
+	$current=($start/$limit +1);
+	if($current>1){
+		$newstart=($current-2)*$limit;
+		echo "<a href='http://localhost/bksun/admin?page=orders&act=list&start=$newstart'>prev</a>";
+	}else echo "<a>prev</a>";
+	for($i=0;$i<$totalpage;$i++){
+		$start=0;
+		$start=$i*$limit;
+		if($current!=($i+1)){
+			echo "<a  href='http://localhost/bksun/admin?page=orders&act=list&start=$start'>".($i+1)."</a>";
+		}else{
+			echo "<a id='current'>".($i+1)."</a>";	
+		}
+	}
+	
+	if($current < $totalpage){
+	$newstart=$current*$limit;
+	$newcurrent=$current+1;
+	echo "<a href='http://localhost/bksun/admin?page=orders&act=list&start=$newstart'>next</a>";
+	}else echo "<a>next</a>";
+}
+?></div>
+
+</body>
+</html>

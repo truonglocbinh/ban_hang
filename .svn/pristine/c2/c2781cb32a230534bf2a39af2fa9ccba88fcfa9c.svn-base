@@ -1,0 +1,30 @@
+<?php 
+require_once("functions/products.php");
+$type = $_GET['type'];
+$price = $_GET['price'];
+$product = new products();
+$result = $product->findall($type,$price,8);
+?>
+<div id="homelink"> <a href="<?php echo baseurl; ?>">Trang chủ</a> &raquo; <a href="#">Tìm kiếm</a></div>
+<div id="homecontent">
+  <div class="hotproduct" style="background:none">
+    <div class="protitle">
+      <h3>Kết quả tìm kiếm</h3>
+    </div>
+    <div class="procontent">
+      <?php 
+	  if($result != NULL){
+	  ?>
+      <?php foreach($result as $items){ ?>
+      <div class="products"> <a href="<?php echo baseurl."?page=product&act=detail&pid=".$items['pro_id']; ?>"><img src="<?php echo baseurl."images/products/".$items['pro_image']; ?>" width="133" height="133" alt=""></a>
+        <h3><a href="<?php echo baseurl."?page=product&act=detail&pid=".$items['pro_id']; ?>"><?php echo $items['pro_name']; ?></a></h3>
+        <p>Giá : <span class="red"><?php echo $items['pro_price']; ?> vnd</span></p>
+           <div id="muahang" ><a href="<?php echo baseurl."functions/shopCart/addToCart.php?pid=".$items['pro_id']; ?>"></a><a href="<?php echo baseurl."functions/shopCart/addToCart.php?pid=".$items['pro_id']; ?>"><img src="images/products/muahang.jpg" style="width:80px" height="30px" /></a></div>
+      </div>
+      <?php } ?>
+      <?php }else{ ?>
+      <p>Không tìm thấy sản phẩm phù hợp</p>
+      <?php } ?>
+    </div>
+  </div>
+</div>

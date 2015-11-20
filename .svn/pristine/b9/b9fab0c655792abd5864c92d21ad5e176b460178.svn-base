@@ -1,0 +1,26 @@
+<div id="content">
+<div id="leftcontent">
+<?php require("layouts/homeLeft.php"); ?>
+<div id="rightcontent">
+  <?php
+            if (isset($_GET['page'])) {
+                switch ($_GET['page']) {
+                    case "register" : require("functions/users/register.php");break;
+                    case "product" :require("layouts/products/controller.php");break;
+					case "intro" : require ("layouts/intro/intro.php"); break;
+					case "contact" : require ("layouts/contact/contact.php"); break;				
+					case "customer" : require ("layouts/customer/controller.php"); break;					
+					case "document" : require ("layouts/document/controller.php"); break;
+					case "addCart" : require("functions/shopCart/addCart.php");break;
+					case "indexCart": require("functions/shopCart/indexCart.php");break;
+					case "search" : require("layouts/search/home.php"); break;
+					case "searchall": require("layouts/search/all.php"); break;
+					default: echo "hihi, sao lại sửa url thế???";
+
+                }
+            } else {
+                require("layouts/products/home.php");
+            }
+   ?>
+</div>
+</div>

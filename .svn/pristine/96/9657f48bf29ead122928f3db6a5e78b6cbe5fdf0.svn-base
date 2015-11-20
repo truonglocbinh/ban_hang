@@ -1,0 +1,28 @@
+<?php session_start(); ?>
+<?php require_once("config.php"); ?>
+<?php require_once("database.php"); ?>
+<?php require_once("users/users.php"); ?>
+<?php
+$user = $_POST['user'];
+$pass = md5($_POST['pass']);
+$db = new users();
+$checkLogin = $db->checkLogin($user,$pass);
+if($checkLogin == FALSE){ // Login not success
+	echo  1;
+}else{ // Login success
+	$_SESSION['ses_userid'] = $checkLogin['user_id'];
+	$_SESSION['ses_name'] = $checkLogin['user_name'];
+	$_SESSION['ses_level'] = $checkLogin['user_level'];
+	?>
+	<div style='padding:10px 7px'>
+	<?php
+	echo "Xin chào ".$_SESSION['ses_name'].".";
+	?>
+	<a href='#'>Thông tin.</a>
+	<a href='#'>Đơn hàng của bạn.</a>
+	<a href="layouts/logout.php" onclick="return confirm('Bạn có muốn thoát không?')">Thoát</a>
+	</div>
+	<?php
+}
+?>
+

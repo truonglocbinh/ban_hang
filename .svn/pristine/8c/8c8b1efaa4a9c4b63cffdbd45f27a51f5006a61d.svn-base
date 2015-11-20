@@ -1,0 +1,162 @@
+﻿<?php
+
+class products extends database{
+    protected $_table = "tbl_products";
+    public function insert($pro_name,$pro_price,
+    $pro_info,$pro_full,$pro_image,$pro_number,$pro_import,$pro_cateId,$pro_hot,$pro_new){// them 1 record vao bang user
+       $sql="INSERT INTO $this->_table(pro_name,pro_price,pro_info,pro_full,pro_image,pro_number,pro_import,cate_id,"
+               . "pro_hot,pro_new"
+               . ")VALUES('$pro_name','$pro_price','$pro_info','$pro_full','$pro_image',"
+               . "'$pro_number','$pro_import','$pro_cateId','$pro_hot','$pro_new')";
+       return mysql_query($sql);
+   }
+   public function update($id,$pro_name,$pro_price,
+    $pro_info,$pro_full,$pro_image,$pro_number,$pro_import,$pro_cateId,$pro_hot,$pro_new){//update thong tin 1 record
+       if($pro_image == ""){
+           $sql="UPDATE $this->_table SET "
+               . "pro_name='$pro_name',"
+               . "pro_price='$pro_price',"
+               . "pro_info='$pro_info',"
+               . "pro_full='$pro_full',"
+               . "pro_number='$pro_number',"
+               . "pro_import='$pro_import',"
+               . "cate_id=$pro_cateId, "
+               . "pro_hot=$pro_hot,"
+               . "pro_new='$pro_new'"
+               . "WHERE pro_id=$id";
+           return mysql_query($sql);
+           
+           }  else {
+           $sql="UPDATE $this->_table SET "
+               . "pro_name='$pro_name',"
+               . "pro_price='$pro_price',"
+               . "pro_info='$pro_info',"
+               . "pro_full='$pro_full',"
+               . "pro_image='$pro_image',"
+               . "pro_number='$pro_number',"
+               . "pro_import='$pro_import',"
+               . "cate_id=$pro_cateId,"  
+               . "pro_hot=$pro_hot,"
+               . "pro_new='$pro_new' "
+               . "WHERE pro_id=$id;";
+           return mysql_query($sql);              
+     }       
+   }
+   public function delete($id){//xoa 1 san pham 
+      $sql1="SELECT * FROM $this->_table WHERE pro_id=$id";
+       $this->query($sql1);
+       $data=  $this->fetch();
+   if( unlink("../../../images/products/".$data['pro_image'])){
+       $sql="DELETE FROM $this->_table WHERE pro_id=$id";
+       return mysql_query($sql);
+   }else{
+       $sql="DELETE FROM $this->_table WHERE pro_id=$id";
+       return mysql_query($sql);
+   }
+   }
+   public function showAll(){// lay tat ca cac record cua user
+       $sql="select * from $this->_table ";
+       $this->query($sql);
+       return $this->fetchall();
+   }
+   public function number_Record(){
+       $sql="select * from $this->_table ";
+       $this->query($sql);
+       return $this->numRows();
+   }
+   public function showOne($id){// Lay 1 ban ghi 
+       $sql="SELECT * FROM $this->_table WHERE pro_id=$id";
+       $this->query($sql);
+       return $this->fetch();
+   }
+   public function page($vitri){
+       $sql="SELECT * FROM $this->_table LIMIT $vitri,10";
+       $this->query($sql);
+       return $this->fetchall();
+   }
+   public function isExist($id){
+       $sql="SELECT * FROM $this->_table WHERE pro_id=$id";
+       $this->query($sql);
+       return $this->fetch();
+   }
+public function getName($id){
+    $sql="SELECT * FROM $this->_table WHERE pro_id=$id";
+    $this->query($sql);
+    $data=  $this->fetch();
+    if($data!=null)return $data['pro_id']."-".$data['pro_name'];
+else  return "Không rõ";
+}
+public function isImage($nameImage){
+    if(file_exists("../images/products/".$nameImage)){
+        return "../images/products/".$nameImage;
+    }else{
+        return "images/noimage.jpg";
+    }
+}
+public function getId($name){
+    $sql="SELECT * FROM $this->_table  WHERE pro_name='$name'";
+    $this->query($sql);
+    $data=  $this->fetch();
+    return $data['pro_id'];
+}
+public function search($id,$name,$price,$number,$date,$type,$hot,$new,$searchtype){
+    $data=array(",pro_id =,"=>"'$id'",",pro_name LIKE,"=>"'$name'",",pro_price=,"=>"'$price'",",pro_number=,"=>"'$number'",
+      ",pro_import LIKE,"=>"'$date'",",cate_id=,"=>"'$type'",",pro_hot =,"=>"'$hot'",",pro_new =,"=>"'$new'"
+    );
+$sql="SELECT,*,FROM,tbl_products,WHERE,";
+$t="";
+$keysql="AND";
+if($searchtype == 0) {
+    $keysql="OR";
+}
+foreach ($data as $key => $value) {
+    if(($value !="''")&&($value !="'0'")){
+        $t=$key;
+        $sql=$sql.$key.$value.",".$keysql;
+         break;
+    }   
+}
+foreach ($data as $key => $value) {
+    if(($value !="''")&&($value !="'0'")){
+        if($key == $t){
+        continue;}
+        else{
+            $sql=$sql=$sql.$key.$value.",".$keysql;
+        }
+    }
+}
+$string=trim($sql);
+$data1=explode(",",$string);
+$j=  count($data1);
+   if($data1[$j-1]==$keysql){
+       unset($data1[$j-1]);
+   }
+$string= implode(" ",$data1);
+//echo $string;
+$this->query($string);
+return $this->fetchall();
+}
+ function getData($array,$vitri){
+    $j=count($array)-1;
+    $data=array();
+    for($i=$vitri;$i<($vitri+7);$i++){
+        $data[]=$array[$i];
+        if($i==$j)break;       
+    }
+    return $data;    
+}
+function  TotalProducts(){
+    $sql="SELECT * FROM $this->_table";
+    $this->query($sql);
+    $data=  $this->fetchall();
+    if(empty($data)){
+        return 0;
+    }else{
+       $total=0;
+       foreach ($data as $value){
+           $total=$total + $value['pro_number'];
+       }
+       return $total;
+    }        
+}
+}

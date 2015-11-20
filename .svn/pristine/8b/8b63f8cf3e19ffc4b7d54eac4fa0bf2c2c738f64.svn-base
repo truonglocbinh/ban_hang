@@ -1,0 +1,5 @@
+<?php 
+require ("../../../functions/user.php");
+$user= new user();
+$id= $_POST['uid'];
+$user->delete($id);

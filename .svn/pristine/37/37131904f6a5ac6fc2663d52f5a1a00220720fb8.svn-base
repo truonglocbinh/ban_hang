@@ -1,0 +1,14 @@
+<?php
+session_start();
+if(isset($_SESSION['cart'])){
+	if(isset($_GET['type'])){ // xoa tat ca
+		unset($_SESSION['cart']);
+	}else{
+		if(isset($_GET['id'])){
+			$key = $_GET['id'];
+			unset($_SESSION['cart'][$key]);
+		}
+	}
+}
+header("location:indexMain.php");
+exit();

@@ -1,0 +1,102 @@
+<?php
+require '../database/categories.php';
+if(!isset($_GET['id'])||(empty($_GET['id']))){
+    header("location:".baseurl."admin/index.php?page=category&act=list");
+    exit();
+}
+$id=$_GET['id'];
+$cate=new categories();
+$data=$cate->showOne($id);
+if(empty($data)){
+    header("location:".baseurl."admin/index.php?page=category&act=list");
+    exit();
+}
+?>
+<style>
+    #noidung{
+        width: 750px;
+        height: 760px;
+        float: left;
+       
+    }
+    #head{
+         font-size: 20px;
+        height: 47px;
+        padding-top: 12px;
+        border-bottom: 1px solid #ccc;
+        text-align: center;
+    }
+    #head h2{
+        color: #024457;
+    }
+    #chitiet{
+       
+        width: 700px;
+        height: 640px;
+        padding-left: 50px;
+        padding-top: 50px;
+    }
+    #chitiet table{
+        border-collapse: collapse;
+        margin-bottom: 50px;
+    }
+    tr td{
+        text-align: center;
+        width: 570px;
+        border: 1px solid #ccc;
+    }
+    tr td.binhthuong{
+        height: 50px;
+    }
+    table tr td.thuoctinh{
+        font-size: 20px;
+        width: 100px;
+        border: 1px solid #ccc;
+    }
+    div#infor{
+        height: 300px;
+        overflow: scroll;
+        text-align: left;
+        
+    }
+    #menunhanh{     
+        width: 249px;
+        height: 760px;
+        float: left;
+        border-left: 1px solid #ccc;
+    }
+</style>
+<div id="noidung">
+    <div id="head"><h2>Chi tiết <?php echo $data['cate_name'];?></h2></div>
+    <div id="chitiet">
+<table>
+   
+    <tr>
+        <td class="thuoctinh">Mã :</td>
+        <td  class="binhthuong"><?php echo $data['cate_id'];?></td>
+    </tr>
+     <tr>
+        <td class="thuoctinh">Tên :</td>
+        <td class="binhthuong"><?php echo $data['cate_name'];?></td>
+    </tr>
+     <tr>
+        <td class="thuoctinh">Thông tin :</td>
+        <td><div id="infor"><?php echo $data['cate_info'];?></div></td>
+    </tr>
+     <tr>
+        <td class="thuoctinh">Trạng thái</td>
+        <td class="binhthuong" style="text-align: left;"><?php echo $data['cate_status'];?></td>
+    </tr>
+</table>
+        <span >
+            <a href="<?php echo baseurl."admin/index.php";?>"><img src="images/home.png" width="50px" height="50px" title="Trang chủ"></a>
+            <a href="#" ><img src="images/trash.png" width="50px" height="50px" title="Xóa"/></a>
+            <a href="<?php echo baseurl."admin/index.php?page=category&act=list";?>"><img src="images/list.png" width="50px" height="50px" title="Danh sách"/></a>
+            <a href="<?php echo baseurl."admin/index.php?page=category&act=edit&id=".$id;?>"><img src="images/pencil.png" width="50px" height="50px" title="Chỉnh sửa"></a>
+        </span>
+    </div>
+  
+</div>
+<div id="menunhanh">
+    
+</div>

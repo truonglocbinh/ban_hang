@@ -1,0 +1,271 @@
+<?php
+require '../database/products.php';
+require '../database/categories.php';
+require '../database/sales.php';
+$cate=new categories();
+$pro=new products();
+$record=$pro->number_Record();
+$curent=1;
+$tongsotrang= ceil($record/10);
+if(!isset($_GET['trang']))$_GET['trang']=1;
+if(isset($_POST['jump'])){
+    if($_POST['jump']>0 &&$_POST['jump']<=$tongsotrang){
+        $curent=$_POST['jump'];
+    }else{
+        $curent=1;
+    }
+}else{
+    $curent=$_GET['trang'];
+}
+$vitri=($curent-1)*10;
+$data=$pro->page($vitri);
+?>
+<style>
+    #showtable{
+        height: 715px;    
+    }
+    #pages{
+        width: 1000px;
+        height: 44px;       
+        border-top: 1px solid #1392e9;
+    }
+    #pagination{
+        width: 600px;
+        float: left;
+        height: 37px;
+        padding-top: 7px;
+    }
+    
+    #pagination ul li{
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        float: left;
+        margin: 0px;
+        list-style-type: none;
+        border-right:1px solid #CCC;
+        
+    }
+    #pagination ul li a{      
+        font-size: 18px;
+        color: #0099FF;      
+        text-decoration: none;
+    }
+    #infor{
+        height: 44px;
+        width: 400px;
+        float: left;
+    }
+    #infor p{
+        float: left;
+    }
+</style>
+ <script type="text/javascript">
+        $(document).ready(function(){
+            $("a.del").click(function(){
+               if(confirm("Việc xóa sản phẩm này có thể ảnh hưởng tới một số dữ liệu khác!Bạn có muốn tiếp tục xóa ?")){
+                  $id=$(this).attr("name"); 
+                  $(this).parent().parent().fadeOut("slow");                 
+                  $.ajax({
+                      "url": "modules/products/deleteajax.php",                     "type":"post",
+                      "data":"uid="+$id,
+                      "async":"false",
+                      success: function (data) {
+                       
+                    }
+                  });
+               } 
+               return false;
+            });
+            $("a.viewimg").click(function(){
+               obj = $("#showimg");
+               name = $(this).attr("name");
+               $("#showpic").html("<img src='../images/products/"+name+"' width='300' />");
+               $("#overlay").css("height","1000px").show();
+               obj.css("opacity","1");
+               obj.show();
+            });
+            $("span.close").click(function(){
+                $(this).parent().hide();
+                $("#overlay").hide();
+                $("body").css("opacity","1");
+            });
+        });
+        </script>
+        <style type="text/css">
+/*            #overlay{
+                position: absolute;
+                top: 0px;
+                width: 100%;
+                opacity: 0.8;
+                background: #333;
+                display: none
+            }
+            #showimg{
+                position:absolute;top:20%;left:30%;
+                width:470px;
+                height:300px;
+                display:none;
+                background: #333;
+                border: 1px solid #060;
+                padding: 30px 0px 30px 30px;
+            }
+            #showimg img{
+                max-width: 400px;
+                max-height: 300px
+            }
+            .close{
+                color: #F00;
+                position: absolute;
+                top: 3px;
+                right: 5px;
+                cursor: pointer;
+            }*/
+#news{
+        height: 715px;
+        background-color: plum;
+    }
+    #head{
+        width: 640px;
+        height: 49px;
+        border-bottom: 1px solid #0099FF;
+        padding-left: 360px;
+        padding-top: 5px;
+    }
+    #head h1{
+        color: #000;
+    }
+    #noidung{
+        width: 900px;
+        padding-left: 50px;
+        padding-right: 50px;
+        height: 620;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        
+    }
+    #noidung  table{
+       
+        
+        padding: 5px;
+        border-collapse: collapse;
+    }
+    table td{
+         border: 1px solid #CCCCCC;
+                text-align: center;
+         
+    }
+    .title{
+      
+    }
+    table tbody td{
+        font-size: 20px;
+        width: 890px;
+        height: 55px;
+        background-color: rgb(238, 238, 238);
+    }
+    .title td{
+        font-size: 25px;
+        font-weight: normal;
+        color: #ffffff;
+        width: 890px;
+        height: 50px;
+        background-color:  rgb(112, 196, 105);
+    }
+    
+    #pages{
+        height: 44px;
+        border-top: 1px solid #1392e9;
+    }
+   
+        </style>
+<!--        <div id="showimg">
+            <span class="close">Close x</span>
+            <div id="showpic"></div>
+        </div>-->
+   <script language='javascript'>
+    function isNumberKey(evt)
+    {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+       </script>
+<div id="news">
+    <div id="head"><h1>Danh sach san pham</h1></div>
+    <div id="noidung">
+    <table >
+        <tr class="title">
+            <td>Id</td>
+            <td>Ten</td>
+            <td>Gia</td>
+            <td>So luong</td>
+            <td>Ngay nhap</td>
+            <td>Chung loai</td>
+            <td></td>
+        </tr>
+        <tbody>
+        <?php foreach ($data as $value) {?>
+        <tr>
+            <td><?php echo $value['pro_id'];?></td>
+            <td><?php echo $value['pro_name'];?></td>
+            <td><?php echo $value['pro_price'];?></td>
+            
+<!--            <td><a href="javascript:void(0)" class="viewimg" name="<?php echo $value['pro_image'];?>">Xem anh</a></td>-->
+            <td><?php echo $value['pro_number'];?></td>
+            <td><?php echo $value['pro_import'];?></td>
+            <td><?php echo $cate->getName($value['cate_id']);?></td>
+              <td> 
+            <a href="<?php echo baseurl."admin/index.php?page=products&act=detail&id=".$value['pro_id'];?>">
+                <img src="images/eye.png" width="20" height="20" title="Chi tiet"></a>
+            <a href="javascript:void(0)" class="del" name="<?php echo $value['pro_id'];?>">
+                <img src="images/trash.png" width="20" height="20"title="Xoa"></a>
+            <a href='<?php echo baseurl."admin/index.php?page=products&act=edit&id=".$value['pro_id'];?>'>
+                <img src="images/pencil.png"width="20" height="20" title="Cap nhat"></a>
+        </td>
+        </tr>
+        </tbody>
+        <?php }?>
+    </table>
+</div>
+</div>
+<div id="pages">
+     <div id="pagination">
+   <?php 
+    
+    echo "<ul>";
+    if($curent!=1){
+       $i=$curent-1;
+       echo "<li><a href='index.php?page=products&act=list&trang=$i' style=''>"."Previous"."</a></li>";
+    }?>
+    <?php 
+    if($tongsotrang<=13){
+    for($i=1;$i<=$tongsotrang;$i++){ ?>
+     <li><a href="index.php?page=products&act=list&trang= <?php echo $i; ?>"
+            <?php if($curent == $i) echo "style='font-weight:bold;color:red;'" ?>
+            ><?php echo $i;?></a></li>
+    <?php
+    }}else{
+       for($i=1;$i<=13;$i++){ ?>
+           <li><a href="index.php?page=products&act=list&trang= <?php echo $i; ?>"
+            <?php if($curent == $i) echo "style='font-weight:bold;color:red;'" ?>
+            ><?php echo $i;?></a></li>
+      <?php  }  
+    } ?>   
+   <?php  if($curent !=$tongsotrang){
+       $i=$curent + 1;
+       echo "<li><a href='index.php?page=products&act=list&trang=$i'>"."Next"."</a></li>";
+    }
+    echo "</ul>";?>
+     </div>
+     <div id="infor">
+         <p style="padding-right:  25px;">Tổng số trang : <?php echo $tongsotrang; ?>  
+         <form method="post" action="">
+             Tới:<input type="text" name="jump" size="7" onKeyPress="return isNumberKey(event)"><input type="submit" value="Go">
+         </form>
+         </p>
+         <p>Bạn đang ở trang số <?php echo $curent; ?></p>
+         
+     </div>
+</div>

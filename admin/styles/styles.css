@@ -1,0 +1,178 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17-07-2014, 10:55:28
+    Author     : LOCBINH
+*/
+body, html {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 100;
+    background:#ffecd0;
+    background-size:100% 100%, 100px 100px;
+    background-image: linear-gradient(90deg, transparent 100%, white 50%), linear-gradient(45deg, rgba(255, 255, 255, .3) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .3) 50%, rgba(255, 255, 255, .3) 75%, transparent 75%, transparent);
+}
+*{
+	margin:0px;
+	padding:0px;
+}
+#wrapper{
+	width:1000px;  
+        height: 1000px;
+	margin:0px auto;
+        padding: auto;
+        background-color: #fff;
+}
+#header{
+   height: 99px;
+   border-bottom: 1px solid red;    
+   background-color: blue;
+   
+}
+.menu{
+    
+    height: 40px;
+    background-color: #ffecd0;
+    background-size:100% 100%, 100px 100px;
+    background-image:  linear-gradient(90deg, transparent 50%, white 50%), linear-gradient(45deg, rgba(255, 255, 255, .3) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .3) 50%, rgba(255, 255, 255, .3) 75%, transparent 75%, transparent);
+    position: relative;
+    z-index: 100;
+}
+  .menu{
+        border:none;
+        border:0px;
+        margin:0px;
+        padding:0px;
+        font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
+        font-size:14px;
+        font-weight:bold;
+        }
+        .menu ul{
+        background:#F93;
+        height:40px;
+        list-style:none;
+        margin:0;
+        padding:0;
+/*        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;*/
+        -webkit-box-shadow: inset 0px 16px 0px 0px rgba(255, 255, 255, .1);
+        -moz-box-shadow: inset 0px 16px 0px 0px rgba(255, 255, 255, .1);
+        box-shadow: inset 0px 16px 0px 0px rgba(255, 255, 255, .1);
+        }
+        .menu li{
+        float:left;
+        padding:0px 0px 0px 15px; 
+        }
+        .menu li a{
+        color:#000;
+        display:block;
+        font-weight:normal;
+        line-height:40px;
+        margin:0px;
+        padding:0px 25px;
+        text-align:center;
+        text-decoration:none;
+        }
+        .menu li a:hover{
+        background:#C60;
+        color:#FFFFFF;
+        text-decoration:none;
+        -webkit-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);
+        -moz-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);
+        box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);
+        }
+        .menu ul li:hover a{
+        background:#C60;
+        color:#FFFFFF;
+        text-decoration:none;
+        }
+        .menu li ul{
+        display:none;
+        height:auto;
+        padding:0px;
+        margin:0px;
+        border:0px;
+        position:absolute;
+        width:200px;
+        z-index:200;
+        }
+        .menu li:hover ul{
+        display:block; 
+        }
+        .menu li li {
+        display:block;
+        float:none;
+        margin:0px;
+        padding:0px;
+        width:200px;
+        background:#F93;
+        /*this is where the rounded corners for the dropdown disappears*/
+        }
+        .menu li:hover li a{
+        background:none;
+        }
+        .menu li ul a{
+        display:block;
+        height:40px;
+        font-size:14px;
+        font-style:normal;
+        margin:0px;
+        padding:0px 10px 0px 15px;
+        text-align:left;
+        }
+        .menu li ul a:hover, .menu li ul li:hover a{
+        border:0px;
+        color:#ffffff;
+        text-decoration:none;
+        background:#C60;
+        -webkit-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);
+        -moz-box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3);
+        box-shadow: inset 0px 0px 7px 2px rgba(0, 0, 0, .3); 
+        }
+#content{
+    height: 760px;
+    background-color: #FAFAFA;
+}
+#footer{
+    height: 100px;
+    background-color: #EFF8FB;
+}
+#logo{
+  width:100px;
+  padding-left:300px;
+  float: left;
+}
+#quydinh{
+  height: 60px;
+  padding-top: 40px;
+  width: 600px;
+  float: left;
+}
+#right{   
+    width: 100px;
+    height: 300px;
+    float:  right;
+    position: fixed;
+    
+    top: 100px;
+    right: 0px; 
+}
+#right ul {
+   list-style-type: none;
+}
+#backtop{   
+    width: 50px;
+    height: 50px;
+    float:  right;
+    
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+/*    background-color: #000;*/
+  
+}

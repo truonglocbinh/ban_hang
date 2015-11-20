@@ -1,0 +1,15 @@
+<?php
+if(isset($_GET['act'])){
+	switch($_GET['act']){
+		case "list" : require("layouts/products/categories.php"); break;
+		case "detail" : require("layouts/products/detail.php"); break;
+		case "comment" : require("layouts/products/comment.php"); break;
+	}
+}
+if(isset($_GET['work'])){
+	switch($_GET['work']){
+		
+		//case "comment" : require("layouts/products/comment.php"); break;
+		//case "mota" : require("layouts/products/mota.php"); break;
+	}
+}

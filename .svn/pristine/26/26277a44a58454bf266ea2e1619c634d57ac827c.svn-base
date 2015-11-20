@@ -1,0 +1,77 @@
+<?php 
+require_once("functions/categories.php");
+?> 
+<?php 
+$cid = $_GET['cateid'];
+$categories = new categories();
+$limit=4;
+if(isset($_GET['start'])){
+	$start = $_GET['start'];
+}else{
+	$start = 0;
+}
+if(isset($_GET['totalpages'])){
+	$totalpages = $_GET['totalpages'];
+}else{
+	$totalrecord = $categories->totalRecord($cid);
+	$totalpages = ceil($totalrecord/$limit);
+}
+//$listuser = $users->listuser($start,$limit);
+$info = $categories->getOne($cid);
+?>
+<div id="catelink" style="margin-left:15px;"> 
+<a style="color:#06F;" href="<?php echo baseurl; ?>">TRANG CHỦ</a> &raquo;
+<a style="color:#06F;" href="<?php echo baseurl."/?page=product&act=list&pages=3&cateid=1&start=0"; ?>"> <?php echo $info['cate_name']; ?></a> </div>
+<div id="catecontent">
+  <div class="cateproduct " style=" background:none">
+    <div class="cattitle">
+      <h1><?php echo $info['cate_name']; ?></h1>
+    </div>
+    <div class="catcontent">
+      <?php 
+	  $listproduct = $categories->listProduct($cid,$start,$limit);
+	  if($listproduct != NULL){
+	  ?>
+      <?php foreach($listproduct as $items){ ?>
+      <div class="products"> <a href="<?php echo baseurl."?page=product&act=detail&pid=".$items['pro_id']; ?>"><img src="<?php echo baseurl."images/products/".$items['pro_image']; ?>" width="133" height="133" alt=""></a>
+        <h3><a href="<?php echo baseurl."?page=product&act=detail&pid=".$items['pro_id']; ?>"><?php echo $items['pro_name']; ?></a></h3>
+        <p  class="red">Giá : <span><?php echo $items['pro_price']; ?> vnd</span></p>
+        <div id="muahang" ><a href="<?php echo baseurl."functions/shopCart/addToCart.php?pid=".$items['pro_id']; ?>"></a><a href="<?php echo baseurl."functions/shopCart/addToCart.php?pid=".$items['pro_id']; ?>"><img src="images/products/muahang.jpg" style="width:80px" height="30px" /></a></div>
+      </div>
+      <?php } ?>
+      <?php }else{ ?>
+      <p>Chưa có sản phẩm</p>
+      <?php } ?>
+    </div>
+  </div>
+  <div class="page">
+<?php
+if($totalpages > 1 && $totalpages<5){ // số trang phải từ 2 trang trở lên
+	$current = ($start/$limit) + 1; // trang hiện hành
+	if($current != 1){ // Nút prev
+		$newstart = $start - $limit;
+		$new=$current-1;
+		echo "<a  class='current'href='".baseurl."/?page=product&act=list&cateid=$cid&start=$newstart&numpage=$new'>Prev</a>";
+	}	
+	for($i=1;$i<=$totalpages;$i++){
+		$newstart = ($i - 1)*$limit;
+		if($i == $current){
+		echo "<span class='rightnow'>".$i."</span>";}
+		else{
+			$new=$current+1;
+     echo "<a class='current' href='".baseurl."/?page=product&act=list&cateid=$cid&start=$newstart&numpage=$new'>".$i."</a>";
+}
+		
+	}
+	if($current != $totalpages){ // Nút next
+		$newstart = $start + $limit;
+		$new=$current+1;
+		echo "<a  class='current'href='".baseurl."/?page=product&act=list&cateid=$cid&pages=$current&start=$newstart&numpage=$new'>Next</a>";
+	}
+}
+else
+?>
+</div>
+</div>
+
+

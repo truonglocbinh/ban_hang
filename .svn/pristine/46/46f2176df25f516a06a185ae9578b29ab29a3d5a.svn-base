@@ -1,0 +1,145 @@
+<?php require("../functions/orders.php"); ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+<style type="text/css">
+.table{
+	border:1px solid #999;
+	padding-top:20px;
+	height:400px;
+	width:600px;
+	margin:20px 0px 0px 250px;
+	box-shadow:5px 2px 5px #999999;
+	border-radius:5px;
+}
+table{
+	border-collapse:collapse;
+
+}
+.title{
+	margin-top:50px;
+}
+.tile{
+	background-color:#999;
+}
+#list{
+	width:45px;
+}
+a{
+	text-decoration:none;
+}
+.pt a{
+	border:1px solid #666666;
+	padding-top:1px; 
+	padding-left:4px;
+	padding-right:4px;
+	margin-left:2px;
+	border-radius:3px;
+}
+#current{
+	color:#F00;
+}
+.search{
+	background-color:#0F3;
+	height:70px;
+	padding-top:10px;
+	padding-left:10px;
+}
+.search input{
+	height:30px;
+	width:120px;
+	margin-left:7px;
+	border-radius:5px;
+}
+table input {
+	height:27px;
+	width:150px;
+	background-color:#FFF;
+}
+.pt{	
+	margin-left:150px;
+	margin-right:130px;
+	margin-top:70px;
+    box-shadow:5px 2px 5px #999999;
+}
+.pt a{  
+	border:1px solid #666666;
+	padding-top:1px; 
+	padding-left:4px;
+	padding-right:4px;
+	margin-left:2px;
+	border-radius:3px;
+}
+td:hover{
+	background-color:#CCC;
+}
+</style>
+<body>
+<div class="title" align="center"><h3> Danh sách khách hàng order</h3></div>
+<?php 
+$start=0;
+$limit=3;
+if(isset($_GET['act'])){
+	if(isset($_GET['start'])){
+		$start=$_GET['start'];
+	}
+	$oder=new orders();
+	$data=array();
+	$data=$oder->showOldoderName($start,$limit);
+	$totalpage=ceil($oder->showOldoderRow()/$limit);	
+}
+?>
+<div class="table" align="center">
+<table  width="306" border="1">
+  <tr>
+    <td width="39">stt</td>
+    <td width="106">username</td>
+    <td width="42">detail</td>
+  </tr>
+ <?php 
+ if($data==NULL){
+	echo "<tr><td align='center' colspan='3'>Không có orders nào</td></tr>";
+  }else{
+ 	$stt=1;
+ 	foreach($data as $item){
+ ?>
+ 	 <tr>
+  	  	<td><?php echo $stt;?></td>
+   	 	<td><?php echo $item['user_name'];?></td>
+   		<td><a href="<?php echo baseurl."admin/index.php?page=orders&act=listfullorder&pid=".$item['user_id']; ?>">detail</a></td>
+ 	 </tr>
+  <?php $stt++;
+
+   }}?>
+</table>
+</div>
+<div class="pt"><?php 
+if($totalpage >1){
+	$current=($start/$limit +1);
+	if($current>1){
+		$newstart=($current-2)*$limit;
+		echo "<a href='http://localhost/bksun/admin?page=orders&act=listfull&start=$newstart'>prev</a>";
+	}
+	for($i=0;$i<$totalpage;$i++){
+		$start=0;
+		$start=$i*$limit;
+		if($current!=($i+1)){
+			echo "<a  href='http://localhost/bksun/admin?page=orders&act=listfull&start=$start'>".($i+1)."</a>";
+		}else{
+			echo "<a id='current'>".($i+1)."</a>";	
+		}
+	}
+	
+	if($current < $totalpage){
+	$newstart=$current*$limit;
+	$newcurrent=$current+1;
+	echo "<a href='http://localhost/bksun/admin?page=orders&act=listfull&start=$newstart'>next</a>";
+	}
+}
+?></div>
+<span><input type="button" name="search" id="search" value="search" /><input type="text" name="tsearch" id="tsearch" /></span>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<?php
+require '../database/products.php';
+require '../database/categories.php';
+$cate=new categories();
+if(!isset($_GET['id'])||(empty($_GET['id']))){
+    header("location:".baseurl."admin/index.php?page=products&act=list");
+    exit();
+}
+$id=$_GET['id'];
+$pro= new products();
+$data=$pro->showOne($id);
+if(empty($data)){
+    header("location:".baseurl."admin/index.php?page=products&act=list");
+    exit();
+}
+?>
+  <script src="libraries/fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
+  <script src="libraries/fancybox/jquery.fancybox-1.3.1.pack.js"></script>
+  <script src="libraries/fancybox/jquery.fancybox-1.3.1.css"></script>
+<style>
+      #noidung{
+        width: 750px;
+        height: 760px;
+        float: left;
+        
+         position: relative;
+    }
+    #head{
+         font-size: 20px;
+        height: 48px;
+        padding-top: 12px;
+       
+        text-align: center;
+    }
+    #chitiet{       
+        width: 700px;
+        height: 640px;
+        padding-left: 50px;
+        padding-top: 50px;
+    }
+     #chitiet table{
+        border-collapse: collapse;
+        margin-bottom: 40px;
+    }
+    tr td{
+        text-align: center;
+        width: 520px;
+        height: 60px;
+        border: 1px solid #ccc;
+        font-size: 22px;
+    }
+    #pro_infor{
+        height: 60px;
+        overflow: scroll;
+    }
+    #pro_full{
+        height: 60px;
+        overflow: scroll;
+    }
+   
+    table tr td.thuoctinh{
+        font-size: 20px;
+        width: 150px;
+        border: 1px solid #ccc;
+    }
+      #menunhanh{
+        width: 250px;
+        height: 760px;
+        float: left;
+         
+       
+    }
+     #fancybox-wrap {
+      position: absolute;
+      top: 260px !important; 
+      left: 447px !important; 
+}
+</style>   
+<script>
+$(document).ready(function(){
+   $("a#viewimage").fancybox({
+      'titleShow'		: false
+			}); 
+});
+</script>
+<div id="noidung">
+    <div id="head"><h1>Chi tiết sản phẩm</h1></div>
+    <div id="chitiet">
+        <table>
+    <tr>
+        <td class="thuoctinh"></td>
+        <td><a  id="viewimage" href="<?php echo $pro->isImage($data['pro_image']); ?>">Xem anh</a></td>
+    </tr>
+    <tr>
+        <td class="thuoctinh">Mã sản phẩm : </td>
+        <td><?php echo $data['pro_id'];?></td>
+    </tr>
+     <tr>
+        
+        <td class="thuoctinh">Tên sản phẩm: </td>
+        <td><?php echo $data['pro_name'];?></td>
+    </tr>
+    <tr>
+        
+        <td class="thuoctinh">Giá sản phẩm: </td>
+        <td><?php echo $data['pro_price'];?></td>
+    </tr>
+    <tr>
+        <td class="thuoctinh">Thông tin  sản phẩm : </td>
+        <td><div id="pro_infor"><?php echo $data['pro_info'];?></div></td>
+    </tr>
+    <tr>
+        <td class="thuoctinh">Đặc tính kỹ thuật: </td>
+        <td><div id="pro_full"><?php echo $data['pro_full'];?></div></td>
+    </tr>
+   
+    <tr>
+        <td class="thuoctinh">Số lượng:</td>
+        <td><?php echo $data['pro_number'];?></td>
+    </tr>
+    <tr>
+        <td class="thuoctinh">Ngày nhập kho :</td>
+        <td><?php echo $data['pro_import'];?></td>
+    </tr>
+     <tr>
+        <td class="thuoctinh">Loại-Mặt hàng</td>
+        <td><p><?php echo $cate->getName($data['cate_id']);?><?php 
+           if($data['pro_hot']==1) echo "<img src='images/hot.png' width='30' height='30'>";
+           if($data['pro_new']==1) echo "<img src='images/new.png' width='50' height='50'>";
+           ?></p></td>
+    </tr>
+</table>
+        <span style="margin-top:30px;">
+            <a href="<?php echo baseurl."admin/index.php";?>"><img src="images/home.png" width="50px" height="50px" title="Trang chủ"></a>
+            <a href="#" ><img src="images/trash.png" width="50px" height="50px" title="Xóa"/></a>
+            <a href="<?php echo baseurl."admin/index.php?page=products&act=list";?>"><img src="images/list.png" width="50px" height="50px" title="Danh sách"/></a>
+            <a href="<?php echo baseurl."admin/index.php?page=products&act=edit&id=".$id;?>"><img src="images/pencil.png" width="50px" height="50px" title="Chỉnh sửa"></a>
+        </span>
+    </div>
+</div>
+<div id="menunhanh"></div>
+

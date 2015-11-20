@@ -1,0 +1,9 @@
+<?php
+class pin extends database{
+	protected $_table = "tbl_documents";
+	public function getdata(){
+		$sql = "select * from $this->_table where doc_type = 'pin'";
+		$this->query($sql);
+		return $this->fetchall();
+	}
+}

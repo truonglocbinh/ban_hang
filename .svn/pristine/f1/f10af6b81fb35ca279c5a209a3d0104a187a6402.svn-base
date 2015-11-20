@@ -1,0 +1,10 @@
+<?php
+	if(isset($_GET['page'])){
+		switch($_GET['act']){
+			case "list": require("modules/orders/list.php");break;
+			case "listorder":require("modules/orders/listorder.php");break;
+			case "listfull":require("modules/orders/listfull.php");break;
+			case "listfullorder":require("modules/orders/listfullorder.php");break;
+		}	
+	
+	}else require("../index.php");

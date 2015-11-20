@@ -1,0 +1,11 @@
+<div id="homelink">
+	<a href="<?php echo baseurl; ?>">Trang chủ</a> &raquo; <a href="#">Liên hệ</a>
+</div>
+<div id="homecontent">
+<?php require("functions/contact.php");
+	$contact = new contact();
+	$result = $contact->getdata();
+	echo $result['intro_content'];
+
+?>
+</div>

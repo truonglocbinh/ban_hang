@@ -1,0 +1,28 @@
+<?php
+session_start();
+require("configCart.php");
+if(isset($_GET['pid'])){ // da chon mot san pham
+	$id = $_GET['pid'];
+	$sql = "select * from tbl_products where pro_id = '$id'";
+	$result = mysql_query($sql);
+	$numRow = mysql_num_rows($result);
+	if($numRow > 0){ // san pham co trong database
+		$info = mysql_fetch_assoc($result);
+		if(isset($_SESSION['cart'][$id])){
+			$_SESSION['cart'][$id]['qty']++;
+		}else{
+			$_SESSION['cart'][$id]['qty'] = 1; // so luong
+		}
+		$_SESSION['cart'][$id]['name'] = $info['pro_name']; // ten
+		$_SESSION['cart'][$id]['price'] = $info['pro_price'];
+		$_SESSION['cart'][$id]['image'] = $info['pro_image'];
+		$_SESSION['cart'][$id]['info'] = $info['pro_info'];
+		header("location:indexMain.php");
+		exit();
+	}else{
+		echo "Ban phai chon mot san pham!";
+	}
+}else{
+	header("location:".baseurl);
+	exit();
+}

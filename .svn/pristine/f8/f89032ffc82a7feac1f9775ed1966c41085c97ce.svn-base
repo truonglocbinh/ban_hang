@@ -1,0 +1,32 @@
+#menu ul li{
+	float:left;
+	height:35px;
+	line-height:35px;
+	padding:0px 30px;
+	background:#FFF;
+	border-right:1px solid #CCC;
+	position:relative;
+}
+#menu ul li a{
+	text-decoration:none;
+	color:#000
+}
+#menu ul li ul{
+	width:170px;
+	display:none;
+	position:absolute;
+	top:35px;
+	left:0px;
+}
+#menu ul li ul li{
+	float:none;
+	padding:0px 0px 0px 10px;
+	background:#FFF;
+	border-bottom:1px solid #DDD;
+	height:33px;
+	line-height:33px;
+}
+#menu ul li:hover{
+	background:#000;
+	color:#FFF;
+}

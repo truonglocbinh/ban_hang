@@ -1,0 +1,79 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17-07-2014, 10:55:28
+    Author     : LOCBINH
+*/
+body, html {
+    width: 100%;
+    background: #000;
+}
+*{
+	margin:0px;
+	padding:0px;
+}
+#wrapper{
+	width:1000px;  
+        height: 1000px;
+	margin:0px auto;
+        padding: auto;
+        background-color: #fff;
+/*        border-left: 1px solid #000;
+        border-right: 1px solid #000;*/
+}
+#header{
+   height: 99px;
+   border-bottom: 1px solid red;    
+   background-color: blue;
+}
+#menu{
+    height: 40px;
+    background-color: red;
+}
+#menu ul{
+    list-style-type: none;
+}
+#menu ul li{
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    padding:0px 30px;
+    background:#F30;
+    border-right:1px solid #CCC;
+}
+#menu ul li a{
+    text-decoration: none;
+    color:#FFF;
+
+}
+#menu ul li ul{
+    width: 170px;
+    display: none;
+    position:absolute;
+    top:40px;
+    left:0px;
+}
+#menu ul li ul li{
+    float: none;
+    height:39px;
+    line-height: 39px;
+    padding:0px 0px 0px 10px;
+    background:#090;
+    border-bottom:1px solid #DDD;
+
+}
+#menu li:hover{
+    background-color: #CCC;
+}
+#content{
+    height: 760px;
+   
+}
+#footer{
+    height: 100px;
+    background-color: greenyellow;
+}

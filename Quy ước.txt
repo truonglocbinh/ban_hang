@@ -1,0 +1,31 @@
+﻿Anh em chú ý nhé:(Có gì muốn quy ước anh em viết hết vào file này cho thống nhất)
+
+Chốt lại:
+- Project trên google code tên là bksun
+- Project trên máy là ...htdocs/bksun (bên trong là thư mục ẩn .svn và các thư mục của project luôn, không qua 1 thư mục nào nữa)
+- Cơ sở dữ liệu thống nhất tên là bksun (tên này thống nhất cho cả tên của file csdl trong thư mục bksun/database và tên trong phpmyadmin)
+- Ai có thay đổi cơ sở dữ liệu gì mà chưa biết cách ghép với cơ sở dữ liệu khác thì cứ commit file csdl của mình lên, đính kèm thêm hậu tố vào để phân biệt. tôi sẽ ghép cho
+- Điều cuối cùng: Bất cứ ai có thay đổi gì thì sau khi làm xong sẽ commit lên và thông báo trên face này 1 tiếng
+- Riêng ông Tuấn đổi cổng xampp nên phải cẩn thận file config 
+* Ở bảng orders:
+- Trường order_status sẽ có các giá trị:
++ 0: user đã đặt hàng nhưng chưa được admin duyệt đơn hàng
++ 1: user đã đặt hàng và admin đã duyệt đơn hàng
+
+Quy ước về tổ chức thư mục:
+
+-Tên hàm, tên file mình sẽ đặt tên tiếng anh cho thống nhất, ví dụ file cauhinh.php sẽ thay bằng config.php
+-Tên hàm sẽ viết theo kiểu: chữ thứ 2 sẽ viết hoa chữ đầu, không dùng dấu _ hoặc không viết hoa, ví dụ: fetch_all(), fetchall() thay bằng fetchAll()
+-Đoạn nào khó hiểu anh em nên comment cho rõ ràng, kể cả không khó hiểu thì cũng nên viết 1 2 chữ cho rõ ràng
+-Project sẽ được tổ chức theo thư mục như sau: Có các folder:
+	+admin: chứa các chức năng của admin
+	+database: chỉ chứa database
+	+functions: chứa các hàm xử lý dữ liệu, thao tác với database
+	+images:chứa các folder nhỏ hơn:
+		*home: chứa các logo của website, banner, quảng cáo...
+		*news: chứa các ảnh của phần tin tức, hướng dẫn kĩ thuật
+		*products: chứa ảnh của sản phẩm
+	+layouts: chứa các layouts của website
+	+nbproject: do netbean tự tạo ra, do ông Bình dùng netbean spam ra folder này :v
+	+scripts: chứa file thư viện jQuery
+	+styles: chứa các file css, giao diện

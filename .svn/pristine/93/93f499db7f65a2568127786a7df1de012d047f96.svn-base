@@ -1,0 +1,108 @@
+       <?php  require("functions/categories.php");?>
+        <div id="category">
+            <div class="divtitle"><h2>Danh mục sản phẩm</h2></div>
+            <div id="categorycontent">
+          <?php   $categories=new categories();
+		         $listcate=$categories->showAll();
+		  ?>
+             <?php foreach($listcate as $items){ ?>
+      <li><a href="<?php echo baseurl."?page=product&act=list&cateid=".$items['cate_id']; ?>"><?php echo $items['cate_name']; ?></a></li>
+      <?php } ?>
+            </div>
+        </div>
+		<div id="quicksearch">
+        	<div class="divtitle"><h2>Tìm kiếm nhanh</h2></div>
+        	<div class="divcontent">
+          		<form action="<?php echo baseurl."?page=searchall"; ?>" method="get">
+                	<input type="hidden" name="page" value="searchall"  />
+            		<table width="200" border="0" cellspacing="0" cellpadding="0">
+              			<tr>
+                            <td width="64" height="28">Chọn sản phẩm</td>
+                            <td width="136">
+                            	<select name="type">
+                                    <option value="0">Chọn sản phẩm</option>
+										<?php if(isset($listcate)){ ?>
+                                        <?php foreach($listcate as $items){ ?>
+                                        <option value="<?php echo $items['cate_id']; ?>"><?php echo $items['cate_name']; ?></option>
+                                        <?php } } ?>
+                              	</select>
+                            </td>
+              			</tr>
+              			<tr>
+                            <td height="28">Khoảng giá</td>
+                            <td>
+                            	<select name="price">
+                                    <option value="0">Chọn giá</option>
+                                    <option value="1">Dưới 5k</option>
+                                    <option value="2">Từ 5k - 20k</option>
+                                    <option value="3">Từ 20k - 50k</option>
+                                    <option value="4">Từ 50k - 100k</option>
+                                    <option value="5">Từ 100k - 500k</option>
+                    				<option value="6">Trên 500k</option>
+                              	</select>
+                            </td>
+              			</tr>
+              			<tr>
+                            <td height="28">&nbsp;</td>
+                            <td><input type="submit" name="button" id="button" value="Tìm kiếm"></td>
+              			</tr>
+            		</table>
+          		</form>
+			</div>
+		</div>
+		<div id="document">
+        	<div class="divtitle"><h2>Tài liệu kỹ thuật</h2></div>
+        	<div class="divcontent">
+              <ul>
+                <li><a href="#">Hướng dẫn sử dụng pin</a></li>
+                <li><a href="#">Hướng dẫn đập phá pin</a></li>
+                <li><a href="#">Hướng dẫn đốt điện trở</a></li>
+                <li><a href="#">Hướng dẫn sử dụng pin</a></li>
+                <li><a href="#">Hướng dẫn sử dụng pin</a></li>
+                <li><a href="#">Hướng dẫn sử dụng pin</a></li>
+                <li><a href="#">Hướng dẫn sử dụng pin</a></li>
+              </ul>
+        	</div>
+      	</div>
+      	<div id="support">
+        	<div class="divtitle"><h2>Hỗ trợ trực tuyến</h2></div>
+        	<div class="divcontent">
+          		<ul class="listsupport"><!--
+            		<li><a href="ymsgr:sendim?northstar189" mce_href="ymsgr:sendim?northstar189" border="0"><img src="http://opi.yahoo.com/online?u=northstar189&t=1" mce_src="http://opi.yahoo.com/online?u=northstar189&t=1">KTV TuấnND</a></li>
+            		<li><a href="ymsgr:sendim?northstar189" mce_href="ymsgr:sendim?northstar189" border="0"><img src="http://opi.yahoo.com/online?u=northstar189&t=1" mce_src="http://opi.yahoo.com/online?u=northstar189&t=1">KTV VinhLT</a></li>
+            		<li><a href="ymsgr:sendim?northstar189" mce_href="ymsgr:sendim?northstar189" border="0"><img src="http://opi.yahoo.com/online?u=northstar189&t=1" mce_src="http://opi.yahoo.com/online?u=northstar189&t=1">KTV LậpHM</a></li>-->
+          		</ul>
+          		<img src="images/home/hotro.jpg" width="80" alt="Hỗ trợ trực tuyến"></img>
+			</div>
+		</div>
+      	<div id="facebook">
+            <div class="divtitle"><h2>Chúng tôi trên facebook</h2></div>
+            <div class="divcontent"><!--
+          		<object style="border:1px solid #DDD; overflow: hidden; width:250px; height:200px;"  data="http://www.facebook.com/plugins/likebox.php?href=https://www.facebook.com/BKSun-Electronic-Components&amp;width=200&amp;height=200&amp;connections=10&amp;header=false">
+          		</object>-->
+        	</div>
+      	</div>
+      		<div id="partners">
+        		<div class="divtitle"><h2>Thống kê website</h2></div>
+        		<div class="divcontent">
+          			<table width="200" border="0" cellspacing="0" cellpadding="0">
+            			<tr>
+                          <td width="133" height="25">Số lượt truy cập</td>
+                          <td width="67">1213</td>
+            			</tr>
+            			<tr>
+                          <td height="25">Số người đang online</td>
+                          <td>100</td>
+                        </tr>
+                        <tr>
+                          <td height="25">Thành viên</td>
+                          <td>300</td>
+                        </tr>
+                        <tr>
+                          <td height="25">Tổng số sản phẩm</td>
+                          <td>300</td>
+            			</tr>
+          			</table>
+        		</div>
+			</div>
+		</div>

@@ -1,0 +1,29 @@
+<?php
+date_default_timezone_set("Asia/Ho_Chi_Minh");
+if(isset($_POST['order']) && isset($val['name'])){
+	if(isset($_SESSION['ses_name'])){
+		$sql1 = "select * from tbl_orders where user_id = '$_SESSION[ses_userid]' order by order_notice desc limit 1";
+		$result1 = mysql_query($sql1) or die("Can not query!");
+		$numRow= mysql_num_rows($result1);
+		if($numRow == 0){
+			$orderNotice = 1;
+		}else{
+			$info = mysql_fetch_assoc($result1);
+			$orderNotice = $info['order_notice'] + 1;
+		}
+		$orderSum=$sum;
+		foreach($_SESSION['cart'] as $key => $val){
+			$sql = "insert into tbl_orders(pro_id, user_id, order_date, order_number, order_status, order_notice) values('$key','$_SESSION[ses_userid]','".date("Y/m/d H:i:s")."','$val[qty]','0',$orderNotice)";
+			$result = mysql_query($sql);
+		}
+	}else{
+		echo "<p style='color:red'>Bạn vui lòng đăng nhập trước khi mua hàng!</p>";
+	}
+	if(isset($result)){
+		echo "<p style='color:red'>Bạn đã đăng kí mua hàng thành công!</p>";
+		if(isset($_SESSION['cart'])){
+			unset($_SESSION['cart']);
+		}
+	}	
+}
+?>

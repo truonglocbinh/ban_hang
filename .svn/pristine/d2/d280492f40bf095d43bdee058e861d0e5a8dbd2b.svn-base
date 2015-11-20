@@ -1,0 +1,407 @@
+<style>
+      #error{
+        width: 950px;
+        padding-left: 50px;
+        padding-top: 10px; 
+        font-size: 20px;
+        color: mediumblue;
+        height: 40px;
+        background-color: #faebcc;
+       
+    }
+    #noidung{
+        
+        height: 710px;   
+        background-color:  #FAFAFA;
+    }
+    #form{
+        width: 720px;
+        padding-top: 20px;
+        padding-left: 30px;
+        float: left;
+        height: 640px;
+    }
+     #form .input{
+        font-size: 20px;
+        padding: 5px;
+        width: 200px;
+       
+        border:solid 1px #ccc; 
+        -moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2); 
+        -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2); 
+        box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+        -webkit-border-radius: 3px; 
+        -moz-border-radius: 3px; 
+        border-radius: 8px;
+    }
+    #form .input:focus {
+    outline: none !important;
+    border:1px solid #3fb8e8 ;
+    box-shadow: 0 0 10px #3fb8e8;
+}   
+    #form table td{
+        padding-left: 2px;
+        padding-bottom: 15px;
+    }
+    input[type='submit']{
+  font-size: 20px;
+  color: #ffffff;
+  width: 100px;
+  height: 50px; 
+  background-color: #1392e9;
+  border-radius: 5px;
+  border: 0;
+  -moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2); 
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2); 
+    box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+}
+input[type='submit']:hover{
+    cursor: pointer;
+    outline: none !important;
+    border:1px solid #3fb8e8 ;
+    box-shadow: 0 0 10px #3fb8e8;
+}
+textarea{
+  font-size: 20px;
+  width: 490px;
+  height: 240px; 
+  padding: 10px;
+  border-radius: 10px;
+  border: 0;
+  -moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2); 
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2); 
+    box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+}
+textarea:focus{
+    outline: none !important;
+    border:1px solid #3fb8e8 ;
+    box-shadow: 0 0 10px #3fb8e8;
+}
+ table tr td:first-child{
+    font-size: 20px;
+}
+/*     #menunhanh{        
+        width: 230px;
+        padding-left: 20px;
+        float: left;
+        height: 700px;
+        padding-top: 10px;
+        
+    }*/
+/*#cssmenu {
+  width: 247px;
+  float: left;
+  border-style: solid solid none solid;
+  border-color: #D76100;
+  border-size: 1px;
+  border-width: 1px;
+  padding: 0px;
+}
+#cssmenu ul {
+  margin: 0px;
+  padding: 0px;
+ list-style: none;
+}
+#cssmenu ul li{
+    list-style-type: none;
+}
+#cssmenu li a {
+  height: 32px;
+  height: 24px;
+  text-decoration: none;
+  font-weight: normal;
+  color: #9E3C02;
+  display: block;
+  background: url(images/menu4.gif);
+  padding: 8px 0 0 30px;
+}
+#cssmenu li a:hover {
+  color: #fff;
+  background: url(images/menu4.gif) 0 -32px;
+  padding: 8px 0 0 30px;
+}
+#cssmenu li a:active {
+  color: #fff;
+  background: url(images/menu4.gif) 0 -64px;
+  padding: 8px 0 0 30px;
+}*/
+#cssmenu,
+#cssmenu ul,
+#cssmenu ul li,
+#cssmenu ul li a {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  line-height: 1;
+  display: block;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#cssmenu {
+  width: 250px;
+  float: left;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #ffffff;
+}
+#cssmenu ul ul {
+  display: none;
+}
+.align-right {
+  float: right;
+}
+#cssmenu > ul > li > a {
+  padding: 15px 20px;
+  border-left: 1px solid #1682ba;
+  border-right: 1px solid #1682ba;
+  border-top: 1px solid #1682ba;
+  cursor: pointer;
+  z-index: 2;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  background: #36aae7;
+  background: -webkit-linear-gradient(#36aae7, #1fa0e4);
+  background: -moz-linear-gradient(#36aae7, #1fa0e4);
+  background: -o-linear-gradient(#36aae7, #1fa0e4);
+  background: -ms-linear-gradient(#36aae7, #1fa0e4);
+  background: linear-gradient(#36aae7, #1fa0e4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+#cssmenu > ul > li > a:hover,
+#cssmenu > ul > li.active > a,
+#cssmenu > ul > li.open > a {
+  color: #eeeeee;
+  background: #1fa0e4;
+  background: -webkit-linear-gradient(#1fa0e4, #1992d1);
+  background: -moz-linear-gradient(#1fa0e4, #1992d1);
+  background: -o-linear-gradient(#1fa0e4, #1992d1);
+  background: -ms-linear-gradient(#1fa0e4, #1992d1);
+  background: linear-gradient(#1fa0e4, #1992d1);
+}
+#cssmenu > ul > li.open > a {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid #1682ba;
+}
+#cssmenu > ul > li:last-child > a,
+#cssmenu > ul > li.last > a {
+  border-bottom: 1px solid #1682ba;
+}
+.holder {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.holder::after,
+.holder::before {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 6px;
+  height: 6px;
+  right: 20px;
+  z-index: 10;
+  -webkit-transform: rotate(-135deg);
+  -moz-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+.holder::after {
+  top: 17px;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+}
+#cssmenu > ul > li > a:hover > span::after,
+#cssmenu > ul > li.active > a > span::after,
+#cssmenu > ul > li.open > a > span::after {
+  border-color: #eeeeee;
+}
+.holder::before {
+  top: 18px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+  border-top-color: inherit;
+  border-left-color: inherit;
+}
+#cssmenu ul ul li a {
+  cursor: pointer;
+  border-bottom: 1px solid #32373e;
+  border-left: 1px solid #32373e;
+  border-right: 1px solid #32373e;
+  padding: 10px 20px;
+  z-index: 1;
+  text-decoration: none;
+  font-size: 13px;
+  color: #eeeeee;
+  background: #49505a;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+#cssmenu ul ul li:hover > a,
+#cssmenu ul ul li.open > a,
+#cssmenu ul ul li.active > a {
+  background: #424852;
+  color: #ffffff;
+}
+#cssmenu ul ul li:first-child > a {
+  box-shadow: none;
+}
+#cssmenu ul ul ul li:first-child > a {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+#cssmenu ul ul ul li a {
+  padding-left: 30px;
+}
+#cssmenu > ul > li > ul > li:last-child > a,
+#cssmenu > ul > li > ul > li.last > a {
+  border-bottom: 0;
+}
+#cssmenu > ul > li > ul > li.open:last-child > a,
+#cssmenu > ul > li > ul > li.last.open > a {
+  border-bottom: 1px solid #32373e;
+}
+#cssmenu > ul > li > ul > li.open:last-child > ul > li:last-child > a {
+  border-bottom: 0;
+}
+#cssmenu ul ul li.has-sub > a::after {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 5px;
+  height: 5px;
+  right: 20px;
+  z-index: 10;
+  top: 11.5px;
+  border-top: 2px solid #eeeeee;
+  border-left: 2px solid #eeeeee;
+  -webkit-transform: rotate(-135deg);
+  -moz-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+#cssmenu ul ul li.active > a::after,
+#cssmenu ul ul li.open > a::after,
+#cssmenu ul ul li > a:hover::after {
+  border-color: #ffffff;
+}
+
+    ::-webkit-input-placeholder {
+   color: #ccc;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #ccc;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #ccc;  
+}
+
+:-ms-input-placeholder {  
+   color: #ccc;  
+}
+  fieldset{
+        border: 1px solid #ccc;
+        padding-top: 10px;
+    }
+    legend{
+        font-size: 20px;
+        color: red;
+    }
+</style>
+<script src="scripts/script.js"></script>
+ <div id="error">
+<?php
+require ("../database/categories.php");
+?>
+<?php 
+  $er="";
+  $error_name="";
+  $error_infor="";
+  $error_status="";
+  $cate=new categories();
+  if(isset($_POST['ok'])){
+      if(trim($_POST['name']=="")){
+          $error_name="Không được để trống !";        
+      }else {
+         if($cate->isExistName(trim($_POST['name'])))$error_name="Tên đã tồn tại!";
+         else {
+         if($cate->insert(trim($_POST['name']), trim($_POST['infor']), trim($_POST['status']))){
+             $er="Bạn đã thêm thành công";
+             $_POST['name']="";
+             $_POST['infor']="";
+             $_POST['status']="";
+         }  else {
+             $er="Không thể thêm vào cơ sở dữ liệu";
+         }
+            }
+      }
+  }
+?>
+     <strong style="color: #8a6d3b;"><?php if (!empty($er))echo $er;
+                   else echo 'Vui lòng điền đầy đủ thông tin';
+     ?></strong>
+ </div>
+<div id="noidung">
+    
+    <div id="form">
+        <h2 style="margin-bottom: 20px;">Thêm danh mục sản phẩm</h2>
+        <form method="post" action="">
+   <fieldset>
+       <legend>Thêm danh mục mới</legend>
+<table >
+    <tr>
+        <td>Tên danh mục :</td>
+        <td><input type="text" name="name" class="input" placeholder="Tên danh mục"
+                                              value="<?php if(isset($_POST['name'])) echo $_POST['name'];?>" class="input"     
+                   > <span style="color: red; font-size: 18px;">*<?php echo $error_name;?></span></td>
+    </tr>
+    <tr>
+        <td>Thông tin mô tả: </td>
+        <td><textarea rows="10" cols="30" name="infor" placeholder="Thông tin mô tả"><?php if(isset($_POST['infor']))echo $_POST['infor'];?></textarea> <span><?php echo $error_infor;?></span></td>
+    </tr>
+    <tr>
+        <td>Trạng thái:</td>
+        <td><input type="text" name="status" class="input" placeholder="Trạng thái" 
+                                              value="<?php if(isset($_POST['status'])) echo $_POST['status']; ?>" class="input"
+                   > <span><?php echo $error_status;?></span></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td style="padding-left: 110px;"><input type="submit" name="ok" value="Thêm mới"></td>
+    </tr>
+</table>
+   </fieldset>          
+</form>
+    </div>
+     <div id="cssmenu">
+        <ul>
+   <li><a href='#'><span>Trang chủ</span></a></li>
+   <li class='active has-sub'><a href='#'><span>Sản phẩm</span></a>
+      <ul>
+         <li class='has-sub'><a href='#'><span>Quản lý kho hàng</span></a>
+            <ul>
+               <li><a href='#'><span>Sub Product</span></a></li>
+               <li class='last'><a href='#'><span>Sub Product</span></a></li>
+            </ul>
+         </li>
+         <li class='has-sub'><a href='#'><span>Sản phẩm khuyến mãi</span></a>
+            <ul>
+               <li><a href='#'><span>Sub Product</span></a></li>
+               <li class='last'><a href='#'><span>Sub Product</span></a></li>
+            </ul>
+         </li>
+      </ul>
+   </li>
+   <li><a href='#'><span>Tài liệu</span></a></li>
+   <li class='last'><a href='#'><span>Đơn hàng</span></a></li>
+</ul>
+     </div>
+</div>

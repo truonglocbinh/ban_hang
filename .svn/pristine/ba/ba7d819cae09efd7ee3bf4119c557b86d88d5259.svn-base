@@ -1,0 +1,14 @@
+<?php
+// neu khong ton tai bien get nao thi hien ca 3 trang led, pin, trick //
+if (isset($_GET['sub'])){
+	switch($_GET['sub']){
+		case "led": require("layouts/document/led.php"); break;
+		case "pin": require("layouts/document/pin.php"); break;
+		case "trick": require("layouts/document/trick.php"); break;
+	}
+}
+if(isset($_GET['act'])){
+	switch($_GET['act']){
+		case "detail" : require("layouts/document/detail.php"); break;
+	}
+}

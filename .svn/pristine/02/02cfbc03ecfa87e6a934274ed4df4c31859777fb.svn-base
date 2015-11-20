@@ -1,0 +1,196 @@
+<?php require("../functions/user.php")?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+<style type="text/css">
+#search{	
+	background-color:#0F6;
+	height:70px;
+	padding-top:10px;
+	padding-left:10px;
+}
+.table{
+	padding:50px 50px 50px 150px;
+	width: 700px;
+	height: 200px;
+	border-radius:10px;
+}
+
+table{
+  border: 1px solid #dddddd;
+  border-collapse: collapse;
+  border-radius: 4px;
+  box-shadow:10px 10px 10px #999999;
+
+}
+#tile{
+	height:15px;
+	margin-top:20px;
+}
+.title{
+	background-color:#CCC 
+}
+a{
+	text-decoration:none
+}
+.pt{	
+	margin-left:150px;
+	margin-right:130px;
+	margin-top:250px;
+    box-shadow:5px 2px 5px #999999;
+}
+
+#current{
+	color:#F33
+}
+.pt a{  
+	border:1px solid #666666;
+	padding-top:1px; 
+	padding-left:4px;
+	padding-right:4px;
+	margin-left:2px;
+	border-radius:3px;
+}
+td:hover{
+	background-color:#CCC;
+}
+.table input{
+	height:31px;
+}
+#search input{
+	width:120px;
+	height:30px;
+}
+td input{
+	border:0;
+	background-color:#FFF;
+	color:#000
+}
+</style>
+<body>
+<script type="text/javascript">
+ $(document).ready(function(e) {
+    $(".del").click(function(){
+		$id=$(this).attr("name");
+		$(this).parent().parent().fadeOut("fast");
+		$.ajax({
+			"url" : "modules/user/del.php",
+			"type" : "post",
+			"data"	: "uid="+$id,
+			"asyn"	:false,
+			success: function(result){
+				alert(result);
+			}
+		});
+	});
+});
+</script>
+<?php
+$start=0;
+$limit=10;
+$user = new user();
+if(isset($_GET['act'])){//show ra danh sach thanh vien
+	if(isset($_GET['start'])){
+		if(isset($_POST['ok'])){
+			$start=0;	
+		}else{
+			$start=$_GET['start'];
+		}
+	}
+	$data=array();
+	$data=$user->showList($start,$limit);
+	$title="DANH SÁCH CÁC THÀNH VIÊN";
+	$totalpage=ceil($user->numRow()/$limit);
+	
+	if(isset($_POST['ok'])){//kiem tra tim kiem user
+			$suser=trim($_POST['suser']);
+			$sname=trim($_POST['sname']);
+			$sgender=strtolower(trim($_POST['sgender']));
+			$sphone=trim($_POST['sphone']);
+			$semail=trim($_POST['semail']);
+			$slevel=strtolower(trim($_POST['slevel']));
+			header("location:".baseurl."admin/index.php?page=user&act=search&u=$suser&n=$sname&g=$sgender&p=$sphone&e=$semail&l=$slevel");		
+	}
+}
+?>
+<div id="search">
+<form  action="" method="post">
+<input type="submit" name="ok" style="height:30px;width:60px;" value="search"  />
+<input type="text" name="suser" placeholder="search user" />
+<input type="text" name="sname" placeholder="search fullname" />
+<input type="text" name="sgender" placeholder="search gender" />
+<input type="text" name="sphone" placeholder="search phone" />
+<input type="text" name="semail" placeholder="search email" />
+<input type="text" name="slevel" placeholder="search level" />
+</form>
+</div>
+
+<div id="tile"><h3 align='center'>
+<?php echo $title;?>
+</h3></div>
+
+<div class="table">	
+<table width="740" border="1">
+  <tr class="title">
+    <td width="31" height="29">STT</td>
+    <td width="105">USER</td>
+    <td width="148">FULLNAME</td>
+    <td width="62">GENDER</td>
+    <td width="66">PHONE</td>
+    <td width="145">EMAIL</td>
+    <td width="51">LEVEL</td>
+    <td width="35">EDIT</td>
+    <td width="39">DEL</td>
+  </tr>
+  
+   <?php  
+  $stt =1;
+  foreach($data as $temp){
+	  ?>
+  <tr class="tr">
+    <td height="33"><?php echo $stt; ?></td>
+    <td><input style="width:100px;" disabled="disabled" value="<?php echo $temp['user_name'];?>" title="<?php echo $temp['user_name'];?>"/></td>
+    <td><input disabled="disabled" value="<?php echo $temp['user_fullname'] ;?>" title="<?php echo $temp['user_fullname'] ;?>"/></td>
+    <td><?php if($temp['user_gender']==1) {echo "Nam";} else{echo "Nữ";}?></td>
+    <td><?php echo $temp['user_phone'];?></td>
+    <td><input disabled="disabled" style="border:0" value="<?php echo $temp['user_email']; ?>" title="<?php echo $temp['user_email']; ?>" /></td>
+    <td><?php if($temp['user_level']==1)echo "Admin"; else echo "Member";?></td>
+    <td><a href="http://localhost/bksun/admin?page=user&act=edit&id=<?php echo $temp['user_id']?>"><img src="images/eye.png" width="30" height="22" title="edit"></a></td>
+    <td><a class="del" name="<?php echo $temp['user_id']?>" href="javascript:void(0)">del</a></td>
+  </tr>
+  <?php $stt++; }?>
+</table>
+
+</div>
+<div class="pt" align="center">Trang <?php 
+if($totalpage >1){
+	$current=($start/$limit +1);
+	
+	if($current>1){
+		$newstart=($current-2)*$limit;
+		echo "<a href='http://localhost/bksun/admin?page=user&act=list&start=$newstart'>prev</a>";
+	}else echo "<a>prev</a>";
+	
+	for($i=0;$i<$totalpage;$i++){
+		$start=0;
+		$start=$i*$limit;
+		if($current!=($i+1)){
+			echo "<a  href='http://localhost/bksun/admin?page=user&act=list&start=$start'>".($i+1)."</a>";
+		}else{
+			echo "<a id='current'>".($i+1)."</a>";	
+		}
+	}
+	
+	if($current < $totalpage){
+	$newstart=$current*$limit;
+	//$newcurrent=$current+1;
+	echo "<a href='http://localhost/bksun/admin?page=user&act=list&start=$newstart'>next</a>";	
+	}else echo "<a>next</a>";
+}else echo "<a id='current'	>1</a>";
+?></div>
+
+</body>
+</html>

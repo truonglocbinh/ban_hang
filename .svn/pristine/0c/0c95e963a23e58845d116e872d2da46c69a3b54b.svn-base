@@ -1,0 +1,28 @@
+<?php 
+require_once("functions/products.php");
+$key = $_GET['keywords'];
+$product = new products();
+$result = $product->findKey($key,8);
+?>
+<div id="homelink"> <a href="<?php echo baseurl; ?>">Trang chủ</a> &raquo; <a href="#">Tìm kiếm</a></div>
+<div id="homecontent">
+  <div class="hotproduct" style="background:none">
+    <div class="protitle">
+      <h3>Kết quả tìm kiếm</h3>
+    </div>
+    <div class="procontent">
+      <?php 
+	  if($result != NULL){
+	  ?>
+      <?php foreach($result as $items){ ?>
+      <div class="products"> <a href="<?php echo baseurl."?page=product&act=detail&pid=".$items['pro_id']; ?>"><img src="<?php echo baseurl."images/products/".$items['pro_image']; ?>" width="133" height="150" alt=""></a>
+        <h3><a href="<?php echo baseurl."?page=product&act=detail&pid=".$items['pro_id']; ?>"><?php echo $items['pro_name']; ?></a></h3>
+        <p>Giá : <span class="red"><?php echo $items['pro_price']; ?> vnd</span></p>
+      </div>
+      <?php } ?>
+      <?php }else{ ?>
+      <p>Không tìm thấy sản phẩm phù hợp</p>
+      <?php } ?>
+    </div>
+  </div>
+</div>

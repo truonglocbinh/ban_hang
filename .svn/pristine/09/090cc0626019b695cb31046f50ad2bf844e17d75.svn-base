@@ -1,0 +1,39 @@
+  <div id="head">
+    <div id="logo"></div>	
+    <div id="righthead">
+      <div id="slogan"></div>
+      <div id="bottom_righthead">
+        <div id="login"><?php require_once("loginMain.php"); ?></div>
+        <div id="cart"> <img src="../../images/home/cart.jpg" width="50px"/> <a href="#">Giỏ hàng</a> </div>
+      </div>
+    </div>
+  </div>
+  <div id="menus">
+    <div id="menu">
+      <ul>
+        <li><a href="<?php echo baseurl; ?>">Trang chủ</a></li>
+        <li><a href="<?php echo baseurl; ?>?page=intro">Giới thiệu</a></li>           
+        <li class="sub"><a href="<?php echo baseurl; ?>?page=customer">Khách hàng</a>
+            <ul>
+                <li><a href="<?php echo baseurl; ?>?page=customer&sub=guide">Hướng dẫn mua hàng</a></li>
+                <li><a href="<?php echo baseurl; ?>?page=customer&sub=warranty">Chính sách bảo hành</a></li>
+                <li><a href="<?php echo baseurl; ?>?page=customer&sub=question">Hỏi đáp</a></li>                
+            </ul>        
+        </li>
+        <li class="sub"><a href="<?php echo baseurl; ?>?page=document">Tài liệu kỹ thuật</a>
+            <ul>
+                <li><a href="<?php echo baseurl; ?>?page=document&sub=led">Tài liệu về LED</a></li>
+                <li><a href="<?php echo baseurl; ?>?page=document&sub=pin">Tài liệu về PIN</a></li>
+                <li><a href="<?php echo baseurl; ?>?page=document&sub=trick">Thủ thuật chung</a></li>                
+            </ul>        
+        </li>  
+        <li><a href="<?php echo baseurl; ?>?page=contact" style="border:none">Liên hệ</a></li>      
+      </ul>
+    </div>
+    <div id="search">
+      <form action="">
+        <input type="text"  name="keywords" placeholder="Tên sản phẩm" size="20"/>
+        <input type="submit" id="searchbutton" name="search" value="Tìm kiếm"/>
+      </form>
+    </div>
+  </div>

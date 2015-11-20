@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<?php require ("../database/cauhinh.php");
+      require ("../database/database.php");
+      ob_start();
+?>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="styles/styles.css" type="text/css" rel="stylesheet">
+        <script src="scripts/jquery-1.11.1.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">     
+        <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+        <script>
+          $(document).ready(function(){
+              $("#menu ul li.sub").hover(function(){
+                  $(this).find("ul").slideDown();
+              },function(){
+                  $("#menu ul li ul").hide();
+              });
+          });
+        </script>     
+    </head>
+    <body>
+        <div id="overlay"></div>
+        <div id="wrapper">
+            <div id="header"></div>
+            <div id="menu">
+                <ul>
+                    <li class="sub"><a href="javascript:void(0)">User</a>
+                    <ul>
+                        <li><a href="<?php echo baseurl.'admin/index.php?page=user';?>">Danh sách</a></li>
+                        <li><a href="#">Nâng cao</a></li>      
+                    </ul>
+                    </li>
+                    <li class="sub"><a href="javascript:void(0)">Sản phẩm</a>
+                        <ul>
+                        <li><a href="<?php echo baseurl."admin/index.php?page=category&act=add";?>">Thêm Loại</a></li>
+                        <li><a href="<?php echo baseurl."admin/index.php?page=category&act=list";?>">Danh mục sản phẩm</a></li> 
+                        <li><a href="<?php echo baseurl."admin/index.php?page=products&act=list";?>">Chi tiet sản phẩm</a></li>
+                        <li><a href="<?php echo baseurl."admin/index.php?page=products&act=add";?>">Them sản phẩm</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub"><a href="javascript:void(0)">Tài liệu</a>
+                        <ul>
+                        <li><a href="<?php echo baseurl."admin/index.php?page=documents&act=add";?>">Tài liệu kỹ thuật</a></li>
+                        <li><a href="<?php echo baseurl."admin/index.php?page=documents&act=list";?>">Danh Sách</a></li> 
+                        <li><a href="<?php echo baseurl."admin/index.php?page=customers&act=add";?>">Tài liệu khách hàng</a></li>
+                        <li><a href="<?php echo baseurl."admin/index.php?page=customers&act=list";?>">Danh Sách</a></li>
+                        
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0)">Comments</a></li>
+                    <li class="sub"><a href="javascript:void(0)">Sản phẩm khuyến mại</a>
+                        <ul>
+                        <li><a href="<?php echo baseurl."admin/index.php?page=sales&act=add";?>">Thêm san pham</a></li>
+                        <li><a href="<?php echo baseurl."admin/index.php?page=sales&act=list";?>">Xem danh sách</a></li>  
+                        </ul>
+                    </li>
+                    <li class="sub"><a href="javascript:void(0)">Đơn hàng</a>
+                       
+                    </li>
+                    <li class="sub"><a href="javascript:void(0)">Khác</a>
+                        <ul>
+                        <li><a href="<?php echo baseurl."admin/index.php?page=intro&act=add";?>">Them Gioi Thieu</a></li>
+                        <li><a href="<?php echo baseurl."admin/index.php?page=intro&act=list";?>">Xem danh sách</a></li>  
+                        </ul>
+                    </li>
+                    
+                </ul>
+              
+            </div>
+            <div id="content">
+                <?php 
+                    if(isset($_GET['page'])){
+                        switch ($_GET['page']){
+                            case "category":require 'modules/category/controller.php';break;
+                            case "products":require 'modules/products/controller.php';break;
+                            case "documents":require 'modules/documents/controller.php';break;
+                            case "sales":require 'modules/sales/controller.php';break;                        
+                            case "intro":require 'modules/intro/controller.php';
+                                                                break;
+                            case "customers" :require 'modules/customers/controller.php';break;
+                        }
+                    }else{
+                        require 'layout/home.php';
+                    }                
+                ?>
+            </div>
+            <div id="footer">
+                <h1>Sản phẩm của group BKSUN</h1>
+            </div>
+        </div>
+    </body>
+</html>
+
